@@ -9,7 +9,6 @@ using OnlineStore.API.Data;
 
 namespace OnlineStore.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase

@@ -1,0 +1,13 @@
+.candle{
+    background: url(../../assets/img/candle.gif) no-repeat center top fixed;
+    -webkit-background-size: cover;
+    height: 300px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+.logo {
+    background-color: black;
+    padding: 40px;
+    opacity: 0.8;
+    user-select: none;
+}
