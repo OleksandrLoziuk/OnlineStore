@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ClickService } from './_services/click.service';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
 
 @NgModule({
    declarations: [
@@ -28,7 +29,8 @@ import { ClickService } from './_services/click.service';
    ],
    providers: [
       AuthService,
-      ClickService
+      ClickService,
+      ErrorInterceptorProvider
    ],
    bootstrap: [
       AppComponent
