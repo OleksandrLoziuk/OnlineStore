@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { ClickService } from '../_services/click.service';
 import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
@@ -11,10 +10,9 @@ import { AlertifyService } from '../_services/alertify.service';
 export class NavComponent implements OnInit {
   
   model: any ={};
-  registerMode: boolean = false;  
+
   
-  constructor(public authService: AuthService, private clickService: ClickService,
-    private alertify: AlertifyService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -34,11 +32,6 @@ export class NavComponent implements OnInit {
   logout(){
     localStorage.removeItem('token');
     this.alertify.message('logged out');
-  }
-
-  registerClick(){
-    this.clickService.setClick(this.registerMode = true);
-
   }
 
 }

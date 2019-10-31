@@ -1,6 +1,6 @@
-import { Component, OnInit, Input} from '@angular/core';
-import { ClickService } from '../_services/click.service';
+import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,17 +10,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private clickService: ClickService, private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
   
   ngOnInit() {
-  }
-
-  regMode(){
-    return this.clickService.getClick();
+    this.router.navigate(['/categories']);
   }
   
-  cancelRegisterMode(registerMode: boolean) {
-    this.clickService.setClick(registerMode);
-  }
 
 }

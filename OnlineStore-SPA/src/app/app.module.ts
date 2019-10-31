@@ -11,9 +11,14 @@ import { AuthService } from './_services/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { ClickService } from './_services/click.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
+import { AboutComponent } from './about/about.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { DeliveryComponent } from './delivery/delivery.component';
+import { PaymentComponent } from './payment/payment.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { CategoriesListComponent } from './categories-list/categories-list.component';
 
 @NgModule({
    declarations: [
@@ -21,7 +26,13 @@ import { AlertifyService } from './_services/alertify.service';
       NavComponent,
       HeaderComponent,
       RegisterComponent,
-      HomeComponent
+      HomeComponent,
+      AboutComponent,
+      ContactsComponent,
+      DeliveryComponent,
+      PaymentComponent,
+      ReviewsComponent,
+      CategoriesListComponent
    ],
    imports: [
       BrowserModule,
@@ -32,8 +43,7 @@ import { AlertifyService } from './_services/alertify.service';
    ],
    providers: [
       AuthService,
-      ClickService,
-      ErrorInterceptorProvider, 
+      ErrorInterceptorProvider,
       AlertifyService
    ],
    bootstrap: [
