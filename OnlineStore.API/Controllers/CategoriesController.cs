@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineStore.API.Data;
+using OnlineStore.API.Data.Interfaces;
 
 namespace OnlineStore.API.Controllers
 {
@@ -13,25 +14,30 @@ namespace OnlineStore.API.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly DataContext _context;
-        public CategoriesController(DataContext context)
+        private readonly ICategoryRepository _repo;
+        public CategoriesController(ICategoryRepository repo)
         {
-            _context = context;
+            _repo = repo;
 
         }
         // GET api/categories
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {
-            var categories = await _context.Categories.ToListAsync();
-            return Ok(categories);
+            var categories = await _repo.ToListAsync();
+            if(categories!=null)
+            {
+                return Ok(categories);
+            }
+            return BadRequest("Categories NULL");
+            
         }
 
         // GET api/categories/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(x=>x.Id == id);
+            var category = await _repo.GetItemAsync(id);
             return Ok(category);
         }
 

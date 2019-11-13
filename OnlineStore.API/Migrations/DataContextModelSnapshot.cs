@@ -21,7 +21,7 @@ namespace OnlineStore.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CategorySignId");
+                    b.Property<int?>("CategorySignId");
 
                     b.Property<string>("Name");
 
@@ -179,7 +179,7 @@ namespace OnlineStore.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("DeliveryId");
+                    b.Property<int?>("DeliveryId");
 
                     b.Property<string>("Email");
 
@@ -189,7 +189,7 @@ namespace OnlineStore.API.Migrations
 
                     b.Property<string>("Patronymic");
 
-                    b.Property<int>("PaymentId");
+                    b.Property<int?>("PaymentId");
 
                     b.Property<string>("PhoneNumber");
 
@@ -210,8 +210,7 @@ namespace OnlineStore.API.Migrations
                 {
                     b.HasOne("OnlineStore.API.Models.CategorySign", "CategorySign")
                         .WithMany("Categories")
-                        .HasForeignKey("CategorySignId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategorySignId");
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Order", b =>
@@ -260,13 +259,11 @@ namespace OnlineStore.API.Migrations
                 {
                     b.HasOne("OnlineStore.API.Models.Delivery", "Delivery")
                         .WithMany("Users")
-                        .HasForeignKey("DeliveryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DeliveryId");
 
                     b.HasOne("OnlineStore.API.Models.Payment", "Payment")
                         .WithMany("Users")
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("PaymentId");
                 });
 #pragma warning restore 612, 618
         }

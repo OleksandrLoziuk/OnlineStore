@@ -18,6 +18,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using OnlineStore.API.Data;
+using OnlineStore.API.Data.Interfaces;
+using OnlineStore.API.Data.Repositories;
 using OnlineStore.API.Helpers;
 
 namespace OnlineStore.API
@@ -38,6 +40,7 @@ namespace OnlineStore.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters

@@ -7,7 +7,7 @@ namespace OnlineStore.API.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public CategorySign CategorySign { get; set; }
-        public int CategorySignId { get; set; }
+        public int? CategorySignId { get; set; }
         public ICollection<Product> Products { get; set; }
     }
 }

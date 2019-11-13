@@ -14,8 +14,8 @@ namespace OnlineStore.API.Models
         public byte [] PasswordSalt { get; set; }
         public ICollection<Order> Orders { get; set; }
         public Delivery Delivery { get; set; }
-        public int DeliveryId { get; set; }
+        public int? DeliveryId { get; set; }
         public Payment Payment { get; set; }
-        public int PaymentId { get; set; }
+        public int? PaymentId { get; set; }
     }
 }

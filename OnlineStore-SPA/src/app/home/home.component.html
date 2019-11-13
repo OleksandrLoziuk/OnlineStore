@@ -2,15 +2,7 @@
   <div class="row">
     <div class="col-lg-2">
       <div class="list-group categories mt-3 mb-3">
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 1</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 2</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 3</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 4</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 5</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 6</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 7</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 8</a>
-          <a href="#" class="list-group-item list-group-item-action text-light">Категория 9</a>
+          <a href="#" *ngFor="let item of categories" class="list-group-item list-group-item-action text-light">{{item.name}}</a>
         </div>
       </div>
       <div class="col-lg-10 mt-3">
