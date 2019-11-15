@@ -1,0 +1,12 @@
+using OnlineStore.API.Models;
+
+namespace OnlineStore.API.Dtos
+{
+    public class CategoryForListDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public CategorySignForCategoryDto CategorySing { get; set; }
+    }
+}

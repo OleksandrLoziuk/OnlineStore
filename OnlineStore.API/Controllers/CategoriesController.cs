@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineStore.API.Data;
 using OnlineStore.API.Data.Interfaces;
+using OnlineStore.API.Dtos;
 
 namespace OnlineStore.API.Controllers
 {
@@ -15,8 +17,10 @@ namespace OnlineStore.API.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _repo;
-        public CategoriesController(ICategoryRepository repo)
+        private readonly IMapper _mapper;
+        public CategoriesController(ICategoryRepository repo, IMapper mapper)
         {
+            _mapper = mapper;
             _repo = repo;
 
         }
@@ -25,21 +29,20 @@ namespace OnlineStore.API.Controllers
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _repo.ToListAsync();
-            if(categories!=null)
-            {
-                return Ok(categories);
-            }
-            return BadRequest("Categories NULL");
             
+            var categoriesToReturn =_mapper.Map<IEnumerable<CategoryForListDto>>(categories);
+
+            return Ok(categoriesToReturn);
+
         }
 
         // GET api/categories/5
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
             var category = await _repo.GetItemAsync(id);
             return Ok(category);
-        }
+        }*/
 
         // POST api/categories
         [HttpPost]
