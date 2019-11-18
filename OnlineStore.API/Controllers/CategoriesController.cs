@@ -17,10 +17,8 @@ namespace OnlineStore.API.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _repo;
-        private readonly IMapper _mapper;
-        public CategoriesController(ICategoryRepository repo, IMapper mapper)
+        public CategoriesController(ICategoryRepository repo)
         {
-            _mapper = mapper;
             _repo = repo;
 
         }
@@ -30,9 +28,9 @@ namespace OnlineStore.API.Controllers
         {
             var categories = await _repo.ToListAsync();
             
-            var categoriesToReturn =_mapper.Map<IEnumerable<CategoryForListDto>>(categories);
+            //var categoriesToReturn =_mapper.Map<IEnumerable<CategoryForListDto>>(categories);
 
-            return Ok(categoriesToReturn);
+            return Ok(categories);
 
         }
 

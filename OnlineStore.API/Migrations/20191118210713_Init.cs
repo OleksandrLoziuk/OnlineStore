@@ -3,21 +3,22 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineStore.API.Migrations
 {
-    public partial class AppModel : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CategorySign",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    PhotoUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategorySign", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -63,23 +64,35 @@ namespace OnlineStore.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "Product",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    CategorySignId = table.Column<int>(nullable: true)
+                    ProductName = table.Column<string>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: false),
+                    Cost = table.Column<double>(nullable: false),
+                    ColorId = table.Column<int>(nullable: false),
+                    MinQuantity = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Balance = table.Column<int>(nullable: false),
+                    IsAvailable = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_Product", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_CategorySign_CategorySignId",
-                        column: x => x.CategorySignId,
-                        principalTable: "CategorySign",
+                        name: "FK_Product_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Product_Color_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Color",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,33 +129,22 @@ namespace OnlineStore.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Photo",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ProductName = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false),
-                    Cost = table.Column<double>(nullable: false),
-                    ColorId = table.Column<int>(nullable: false),
-                    MinQuantity = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    Balance = table.Column<int>(nullable: false),
-                    IsAvailable = table.Column<bool>(nullable: false)
+                    Url = table.Column<string>(nullable: true),
+                    IsMain = table.Column<bool>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Photo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Product_Color_ColorId",
-                        column: x => x.ColorId,
-                        principalTable: "Color",
+                        name: "FK_Photo_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -164,27 +166,6 @@ namespace OnlineStore.API.Migrations
                         name: "FK_Order_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Photo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(nullable: true),
-                    IsMain = table.Column<bool>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Photo", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Photo_Product_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -216,11 +197,6 @@ namespace OnlineStore.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Categories_CategorySignId",
-                table: "Categories",
-                column: "CategorySignId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserId",
@@ -291,9 +267,6 @@ namespace OnlineStore.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payment");
-
-            migrationBuilder.DropTable(
-                name: "CategorySign");
         }
     }
 }

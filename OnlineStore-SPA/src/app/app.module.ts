@@ -19,6 +19,8 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { CategoryService } from './_services/category.service';
+import { CategoryCardComponent } from './category-card/category-card.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +34,8 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
       DeliveryComponent,
       PaymentComponent,
       ReviewsComponent,
-      CategoriesListComponent
+      CategoriesListComponent,
+      CategoryCardComponent
    ],
    imports: [
       BrowserModule,
@@ -44,7 +47,8 @@ import { CategoriesListComponent } from './categories-list/categories-list.compo
    providers: [
       AuthService,
       ErrorInterceptorProvider,
-      AlertifyService
+      AlertifyService,
+      CategoryService
    ],
    bootstrap: [
       AppComponent

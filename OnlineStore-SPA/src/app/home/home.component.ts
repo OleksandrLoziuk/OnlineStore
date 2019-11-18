@@ -1,6 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CategoryService } from '../_services/category.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { Category } from '../_models/category';
 
 
 @Component({
@@ -10,19 +13,20 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  categories: any;
-  constructor(private http: HttpClient, private router: Router) {}
+  categories: Category[];
+  constructor(private router: Router, private categoryService: CategoryService,
+    private alertify: AlertifyService) {}
   
   ngOnInit() {
     this.router.navigate(['/categories']);
-    this.getCategories();
+    this.loadCategories();
   }
-  getCategories() {
-    this.http.get('http://localhost:5000/api/categories').subscribe(response =>{
-      this.categories = response;
+  loadCategories() {
+    this.categoryService.getCategories().subscribe((categories: Category[]) => {
+      this.categories = categories;
     }, error => {
-      console.log(error);
-    });
+      this.alertify.error(error);
+    })
   }
 
 }

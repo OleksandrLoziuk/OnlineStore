@@ -21,27 +21,13 @@ namespace OnlineStore.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CategorySignId");
-
                     b.Property<string>("Name");
 
-                    b.HasKey("Id");
+                    b.Property<string>("PhotoUrl");
 
-                    b.HasIndex("CategorySignId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("OnlineStore.API.Models.CategorySign", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategorySign");
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Color", b =>
@@ -204,13 +190,6 @@ namespace OnlineStore.API.Migrations
                     b.HasIndex("PaymentId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("OnlineStore.API.Models.Category", b =>
-                {
-                    b.HasOne("OnlineStore.API.Models.CategorySign", "CategorySign")
-                        .WithMany("Categories")
-                        .HasForeignKey("CategorySignId");
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Order", b =>

@@ -1,3 +1,7 @@
-<p>
-  categories-list works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div *ngFor="let item of categories" class="col-lg-3 ">
+      <app-category-card [category]="item"></app-category-card>
+    </div>
+  </div>
+</div>
