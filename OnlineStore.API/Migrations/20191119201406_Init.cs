@@ -198,6 +198,96 @@ namespace OnlineStore.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "PhotoUrl" },
+                values: new object[] { 1, "Таблички", "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "PhotoUrl" },
+                values: new object[] { 2, "Покрывала", "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "PhotoUrl" },
+                values: new object[] { 3, "Наволочки", "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "PhotoUrl" },
+                values: new object[] { 4, "Рушники", "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "PhotoUrl" },
+                values: new object[] { 5, "Салфетки", "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "Name", "PhotoUrl" },
+                values: new object[] { 6, "Платки", "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Color",
+                columns: new[] { "Id", "ColorName" },
+                values: new object[] { 1, "Черный" });
+
+            migrationBuilder.InsertData(
+                table: "Color",
+                columns: new[] { "Id", "ColorName" },
+                values: new object[] { 2, "Белый" });
+
+            migrationBuilder.InsertData(
+                table: "Color",
+                columns: new[] { "Id", "ColorName" },
+                values: new object[] { 3, "Бордовый" });
+
+            migrationBuilder.InsertData(
+                table: "Color",
+                columns: new[] { "Id", "ColorName" },
+                values: new object[] { 4, "Синий" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 1, 10, 1, 1, 7.5, "some", true, 10, "Табличка пластик 18х25" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 2, 10, 1, 1, 8.5, "some", true, 10, "Табличка пластик 20х25" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 3, 10, 1, 1, 11.0, "some", true, 10, "Табличка литьё" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 4, 10, 1, 2, 15.800000000000001, "some", true, 10, "Табличка металл" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 5, 10, 2, 2, 60.0, "some", true, 1, "Покрывало рюш шелк" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 7, 10, 3, 2, 27.5, "some", true, 10, "Наволочка жатка" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 8, 10, 4, 2, 32.5, "some", true, 10, "Рушник габардин 36" });
+
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
+                values: new object[] { 6, 10, 2, 3, 95.0, "some", true, 1, "Покрывало рюш атлас" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserId",
                 table: "Order",

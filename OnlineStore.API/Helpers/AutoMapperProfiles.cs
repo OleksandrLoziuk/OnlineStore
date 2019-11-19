@@ -9,9 +9,8 @@ namespace OnlineStore.API.Helpers
     {
         public AutoMapperProfiles()
         {
-            /*CreateMap<Category, CategoryForListDto>()
-            .ForMember(dest => dest.Url, opt => {
-                opt.MapFrom(src => src.CategorySign.Url);
+            /*CreateMap<Category, CategoryForDetailedDto>().ForMember(dest => dest.Products, opt => {
+                opt.MapFrom(src => src.Products);
             });*/
         }
     }

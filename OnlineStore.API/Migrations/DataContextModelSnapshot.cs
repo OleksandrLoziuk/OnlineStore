@@ -28,6 +28,44 @@ namespace OnlineStore.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Таблички",
+                            PhotoUrl = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Покрывала",
+                            PhotoUrl = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Наволочки",
+                            PhotoUrl = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Рушники",
+                            PhotoUrl = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Салфетки",
+                            PhotoUrl = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Платки",
+                            PhotoUrl = "../../assets/img/candle.jpg"
+                        });
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Color", b =>
@@ -40,6 +78,28 @@ namespace OnlineStore.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Color");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ColorName = "Черный"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ColorName = "Белый"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ColorName = "Бордовый"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ColorName = "Синий"
+                        });
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Delivery", b =>
@@ -136,6 +196,104 @@ namespace OnlineStore.API.Migrations
                     b.HasIndex("ColorId");
 
                     b.ToTable("Product");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Balance = 10,
+                            CategoryId = 1,
+                            ColorId = 1,
+                            Cost = 7.5,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 10,
+                            ProductName = "Табличка пластик 18х25"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Balance = 10,
+                            CategoryId = 1,
+                            ColorId = 1,
+                            Cost = 8.5,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 10,
+                            ProductName = "Табличка пластик 20х25"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Balance = 10,
+                            CategoryId = 1,
+                            ColorId = 1,
+                            Cost = 11.0,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 10,
+                            ProductName = "Табличка литьё"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Balance = 10,
+                            CategoryId = 1,
+                            ColorId = 2,
+                            Cost = 15.800000000000001,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 10,
+                            ProductName = "Табличка металл"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Balance = 10,
+                            CategoryId = 2,
+                            ColorId = 2,
+                            Cost = 60.0,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 1,
+                            ProductName = "Покрывало рюш шелк"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Balance = 10,
+                            CategoryId = 2,
+                            ColorId = 3,
+                            Cost = 95.0,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 1,
+                            ProductName = "Покрывало рюш атлас"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Balance = 10,
+                            CategoryId = 3,
+                            ColorId = 2,
+                            Cost = 27.5,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 10,
+                            ProductName = "Наволочка жатка"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Balance = 10,
+                            CategoryId = 4,
+                            ColorId = 2,
+                            Cost = 32.5,
+                            Description = "some",
+                            IsAvailable = true,
+                            MinQuantity = 10,
+                            ProductName = "Рушник габардин 36"
+                        });
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.StringsOrder", b =>
