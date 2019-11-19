@@ -17,8 +17,10 @@ namespace OnlineStore.API.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryRepository _repo;
-        public CategoriesController(ICategoryRepository repo)
+        private readonly IProductRepository _prodRepo;
+        public CategoriesController(ICategoryRepository repo, IProductRepository prodRepo)
         {
+            _prodRepo = prodRepo;
             _repo = repo;
 
         }
@@ -27,7 +29,7 @@ namespace OnlineStore.API.Controllers
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _repo.ToListAsync();
-            
+
             //var categoriesToReturn =_mapper.Map<IEnumerable<CategoryForListDto>>(categories);
 
             return Ok(categories);
@@ -35,12 +37,12 @@ namespace OnlineStore.API.Controllers
         }
 
         // GET api/categories/5
-        /*[HttpGet("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
-            var category = await _repo.GetItemAsync(id);
-            return Ok(category);
-        }*/
+            var products = await _prodRepo.AllItems.Where(p=>p.Id == id).ToListAsync();
+            return Ok(products);
+        }
 
         // POST api/categories
         [HttpPost]
