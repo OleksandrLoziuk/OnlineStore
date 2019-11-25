@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OnlineStore.API.Data.Generic;
 using OnlineStore.API.Data.Interfaces;
@@ -6,9 +5,9 @@ using OnlineStore.API.Models;
 
 namespace OnlineStore.API.Data.Repositories
 {
-    public class ProductRepository : DbRepository<Product>, IProductRepository
+    public class ColorRepository : DbRepository<Color>, IColorRepository
     {
-        public ProductRepository(DataContext context) : base(context)
+        public ColorRepository(DataContext context) : base(context)
         {
         }
     }

@@ -168,7 +168,7 @@ namespace OnlineStore.API.Data
                     MinQuantity = 10,
                     Description ="some",
                     Balance = 10,
-                    IsAvailable = true
+                    IsAvailable = true,
                 }
                 );
         }

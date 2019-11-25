@@ -1,9 +1,8 @@
-using System.Linq;
 using OnlineStore.API.Models;
 
 namespace OnlineStore.API.Data.Interfaces
 {
-    public interface IProductRepository : IDbRepository<Product>
+    public interface IColorRepository: IDbRepository<Color>
     {
         
     }

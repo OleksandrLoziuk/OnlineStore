@@ -9,7 +9,7 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191119201406_Init")]
+    [Migration("20191121185238_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -370,7 +370,7 @@ namespace OnlineStore.API.Migrations
 
             modelBuilder.Entity("OnlineStore.API.Models.Product", b =>
                 {
-                    b.HasOne("OnlineStore.API.Models.Category", "Category")
+                    b.HasOne("OnlineStore.API.Models.Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
