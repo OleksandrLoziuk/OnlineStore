@@ -14,6 +14,7 @@ namespace OnlineStore.API.Dtos
         public string Description { get; set; }
         public int Balance { get; set; }
         public bool IsAvailable { get; set; }
+        public string PhotoUrl { get; set; }
         public ICollection<Photo> Photos { get; set; }
     }
 }

@@ -9,11 +9,18 @@ namespace OnlineStore.API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Product, ProductForListDto>();
+            CreateMap<Product, ProductForListDto>()
+            .ForMember(dest => dest.PhotoUrl, opt => {
+                opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
+            });;
             CreateMap<Product, ProductForDetailedDto>()
             .ForMember(dest => dest.ColorName, opt => {
                 opt.MapFrom(src => src.Color.ColorName);
+            })
+            .ForMember(dest => dest.PhotoUrl, opt => {
+                opt.MapFrom(src => src.Photos.FirstOrDefault(p=>p.IsMain).Url);
             });
+            CreateMap<Photo, PhotoForDetailedDto>();
         }
     }
 }

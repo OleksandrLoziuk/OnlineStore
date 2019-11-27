@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../_models/category';
 import { AlertifyService } from './alertify.service';
+import { Product } from '../_models/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ getCategories(): Observable<Category[]> {
   return this.http.get<Category[]>(this.baseUrl + 'categories');
 }
 
-getCategory(id): Observable<Category> {
-  return this.http.get<Category>(this.baseUrl + 'categories/' + id);
+getCategory(id): Observable<Product[]> {
+  return this.http.get<Product[]>(this.baseUrl + 'categories/' + id);
 }
 }

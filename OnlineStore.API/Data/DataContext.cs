@@ -71,6 +71,20 @@ namespace OnlineStore.API.Data
                     ColorName = "Синий"
                 }
                 );
+            builder.Entity<Photo>().HasData(
+                new Photo{
+                            Id = 1,
+                            Url = "../../assets/img/candle.jpg",
+                            IsMain = true,
+                            ProductId = 1
+                        },
+                new Photo{
+                            Id = 2,
+                            Url = "../../assets/img/candle.jpg",
+                            IsMain = false,
+                            ProductId = 1
+                        }  
+            );
             builder.Entity<Product>().HasData(
                 new Product
                 {

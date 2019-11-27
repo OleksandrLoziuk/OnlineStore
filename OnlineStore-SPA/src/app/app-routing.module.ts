@@ -8,11 +8,13 @@ import { PaymentComponent } from './payment/payment.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { RegisterComponent } from './register/register.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'categories', component: CategoriesListComponent},
+  {path: 'categories/:id', component: CategoryDetailComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contacts', component: ContactsComponent},
   {path: 'delivery', component: DeliveryComponent},

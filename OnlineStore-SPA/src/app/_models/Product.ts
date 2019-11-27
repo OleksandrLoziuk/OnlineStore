@@ -10,5 +10,6 @@ export interface Product {
     description?: string;
     balance?: number;
     isAvailable?: boolean;
+    photoUrl: string;
     photos?: Photo[];
 }

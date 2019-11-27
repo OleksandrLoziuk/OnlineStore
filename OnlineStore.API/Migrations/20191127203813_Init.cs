@@ -288,6 +288,16 @@ namespace OnlineStore.API.Migrations
                 columns: new[] { "Id", "Balance", "CategoryId", "ColorId", "Cost", "Description", "IsAvailable", "MinQuantity", "ProductName" },
                 values: new object[] { 6, 10, 2, 3, 95.0, "some", true, 1, "Покрывало рюш атлас" });
 
+            migrationBuilder.InsertData(
+                table: "Photo",
+                columns: new[] { "Id", "IsMain", "ProductId", "Url" },
+                values: new object[] { 1, true, 1, "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Photo",
+                columns: new[] { "Id", "IsMain", "ProductId", "Url" },
+                values: new object[] { 2, false, 1, "../../assets/img/candle.jpg" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserId",
                 table: "Order",

@@ -9,7 +9,7 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191121185238_Init")]
+    [Migration("20191127203813_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -168,6 +168,22 @@ namespace OnlineStore.API.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Photo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsMain = true,
+                            ProductId = 1,
+                            Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsMain = false,
+                            ProductId = 1,
+                            Url = "../../assets/img/candle.jpg"
+                        });
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Product", b =>
@@ -370,7 +386,7 @@ namespace OnlineStore.API.Migrations
 
             modelBuilder.Entity("OnlineStore.API.Models.Product", b =>
                 {
-                    b.HasOne("OnlineStore.API.Models.Category")
+                    b.HasOne("OnlineStore.API.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);

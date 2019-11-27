@@ -23,7 +23,7 @@ namespace OnlineStore.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
-            var products = await _repo.ToListAsync();
+            var products = await _repo.AllItems.Include(item => item.Photos).ToListAsync();
 
             var productsToReturn = _mapper.Map<IEnumerable<ProductForListDto>>(products);
 
@@ -34,7 +34,7 @@ namespace OnlineStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
-            var product = await _repo.AllItems.Include(item => item.Color).Include(item => item.Category).FirstOrDefaultAsync(x => x.Id == id);
+            var product = await _repo.AllItems.Include(item => item.Color).Include(item => item.Category).Include(item => item.Photos).FirstOrDefaultAsync(x => x.Id == id);
 
             var productToReturn = _mapper.Map<ProductForDetailedDto>(product);
 

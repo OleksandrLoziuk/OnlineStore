@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../_services/category.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Category } from '../_models/category';
+import { Product } from '../_models/Product';
 
 
 @Component({
@@ -12,7 +12,6 @@ import { Category } from '../_models/category';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   categories: Category[];
   constructor(private router: Router, private categoryService: CategoryService,
     private alertify: AlertifyService) {}
@@ -28,5 +27,4 @@ export class HomeComponent implements OnInit {
       this.alertify.error(error);
     })
   }
-
 }

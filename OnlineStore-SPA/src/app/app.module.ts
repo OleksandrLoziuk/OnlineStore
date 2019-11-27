@@ -21,6 +21,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { CategoryService } from './_services/category.service';
 import { CategoryCardComponent } from './category-card/category-card.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 @NgModule({
    declarations: [
@@ -35,7 +37,9 @@ import { CategoryCardComponent } from './category-card/category-card.component';
       PaymentComponent,
       ReviewsComponent,
       CategoriesListComponent,
-      CategoryCardComponent
+      CategoryCardComponent,
+      CategoryDetailComponent,
+      ProductCardComponent
    ],
    imports: [
       BrowserModule,
