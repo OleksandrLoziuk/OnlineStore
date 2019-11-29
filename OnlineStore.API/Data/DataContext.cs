@@ -71,7 +71,7 @@ namespace OnlineStore.API.Data
                     ColorName = "Синий"
                 }
                 );
-            builder.Entity<Photo>().HasData(
+      builder.Entity<Photo>().HasData(
                 new Photo{
                             Id = 1,
                             Url = "../../assets/img/candle.jpg",
@@ -83,7 +83,25 @@ namespace OnlineStore.API.Data
                             Url = "../../assets/img/candle.jpg",
                             IsMain = false,
                             ProductId = 1
-                        }  
+                        },
+                new Photo{
+                            Id = 3,
+                            Url = "../../assets/img/candle.jpg",
+                            IsMain = true,
+                            ProductId = 2
+                        } , 
+                new Photo{
+                            Id = 4,
+                            Url = "../../assets/img/candle.jpg",
+                            IsMain = true,
+                            ProductId = 3
+                        },  
+                new Photo{
+                            Id = 5,
+                            Url = "../../assets/img/candle.jpg",
+                            IsMain = true,
+                            ProductId = 4
+                        }    
             );
             builder.Entity<Product>().HasData(
                 new Product

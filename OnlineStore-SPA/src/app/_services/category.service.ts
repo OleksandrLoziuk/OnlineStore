@@ -22,4 +22,7 @@ getCategories(): Observable<Category[]> {
 getCategory(id): Observable<Product[]> {
   return this.http.get<Product[]>(this.baseUrl + 'categories/' + id);
 }
+getProduct(catid, prodid): Observable<Product> {
+  return this.http.get<Product>(this.baseUrl + 'categories/' + catid + '/' + prodid);
+}
 }

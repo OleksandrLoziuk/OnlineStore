@@ -181,6 +181,27 @@ namespace OnlineStore.API.Migrations
                             IsMain = false,
                             ProductId = 1,
                             Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsMain = true,
+                            ProductId = 2,
+                            Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsMain = true,
+                            ProductId = 3,
+                            Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsMain = true,
+                            ProductId = 4,
+                            Url = "../../assets/img/candle.jpg"
                         });
                 });
 

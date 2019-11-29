@@ -9,12 +9,15 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { RegisterComponent } from './register/register.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
+import { CategoryDetailResolver } from './resolvers/category-detail.resolver';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'categories', component: CategoriesListComponent},
-  {path: 'categories/:id', component: CategoryDetailComponent},
+  {path: 'categories/:id', component: CategoryDetailComponent, resolve: {categories: CategoryDetailResolver}},
+  {path: 'categories/:catid/:prodid', component: ProductDetailComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contacts', component: ContactsComponent},
   {path: 'delivery', component: DeliveryComponent},

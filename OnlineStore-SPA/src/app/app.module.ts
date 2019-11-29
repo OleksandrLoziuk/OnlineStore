@@ -23,6 +23,8 @@ import { CategoryService } from './_services/category.service';
 import { CategoryCardComponent } from './category-card/category-card.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { CategoryDetailResolver } from './resolvers/category-detail.resolver';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
    declarations: [
@@ -39,7 +41,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
       CategoriesListComponent,
       CategoryCardComponent,
       CategoryDetailComponent,
-      ProductCardComponent
+      ProductCardComponent,
+      ProductDetailComponent
    ],
    imports: [
       BrowserModule,
@@ -52,7 +55,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      CategoryService
+      CategoryService,
+      CategoryDetailResolver
    ],
    bootstrap: [
       AppComponent

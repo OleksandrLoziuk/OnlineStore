@@ -3,6 +3,6 @@
     <img src="{{product.photoUrl}}" alt="{{product.productName}}" class="card-img-top">
   </div>
   <div class="card-body p-1">
-    <a href="#" class="btn btn-dark">{{product.productName}}</a> 
+    <a [routerLink]="['/categories/', product.categoryId, product.id]" routerLinkActive="router-link-active"  class="btn btn-dark">{{product.productName}}</a> 
   </div>
 </div> 

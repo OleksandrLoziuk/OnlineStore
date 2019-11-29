@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../_services/category.service';
-import { ProductService } from '../_services/product.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../_models/Product';
@@ -18,18 +17,11 @@ export class CategoryDetailComponent implements OnInit{
     private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadProductsByCategory();
-  }
-  ngDoCheck() {
-    this.loadProductsByCategory();
+    this.route.data.subscribe(data => {
+      this.products = data['categories'];
+    });
   }
 
-  loadProductsByCategory() {
-    this.categoryService.getCategory(+this.route.snapshot.params['id']).subscribe((products: Product[]) =>{
-      this.products = products;
-    }, error => {
-      this.alertify.error(error);
-    })
-  }
+
 
 }

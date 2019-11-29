@@ -9,8 +9,8 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191127203813_Init")]
-    partial class Init
+    [Migration("20191128211046_TestInit")]
+    partial class TestInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -182,6 +182,27 @@ namespace OnlineStore.API.Migrations
                             Id = 2,
                             IsMain = false,
                             ProductId = 1,
+                            Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsMain = true,
+                            ProductId = 2,
+                            Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsMain = true,
+                            ProductId = 3,
+                            Url = "../../assets/img/candle.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsMain = true,
+                            ProductId = 4,
                             Url = "../../assets/img/candle.jpg"
                         });
                 });

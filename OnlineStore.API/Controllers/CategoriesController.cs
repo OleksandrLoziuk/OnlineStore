@@ -18,8 +18,10 @@ namespace OnlineStore.API.Controllers
     {
         private readonly ICategoryRepository _repo;
         private readonly IProductRepository _prRep;
-        public CategoriesController(ICategoryRepository repo, IProductRepository prRep)
+        private readonly IMapper _mapper;
+        public CategoriesController(ICategoryRepository repo, IProductRepository prRep, IMapper mapper)
         {
+            _mapper = mapper;
             _prRep = prRep;
             _repo = repo;
         }
@@ -36,8 +38,22 @@ namespace OnlineStore.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
-            var products = await _prRep.AllItems.Where(p => p.CategoryId == id).ToListAsync();
-            return Ok(products);
+            var products = await _prRep.AllItems.Include(item => item.Photos).Where(p => p.CategoryId == id).ToListAsync();
+
+            var productsToReturn = _mapper.Map<IEnumerable<ProductForListDto>>(products);
+
+            return Ok(productsToReturn);
+        }
+        
+        // GET api/categories/5/2
+        [HttpGet("{idcat}/{idprod}")]
+        public async Task<IActionResult> GetProduct(int idcat, int idprod)
+        {
+            var product = await _prRep.AllItems.Include(item => item.Color).Include(item => item.Category).FirstOrDefaultAsync(x => x.Id == idprod);
+
+            var productToReturn = _mapper.Map<ProductForDetailedDto>(product);
+
+            return Ok(productToReturn);
         }
 
         // POST api/categories

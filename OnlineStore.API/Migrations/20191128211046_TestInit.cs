@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineStore.API.Migrations
 {
-    public partial class Init : Migration
+    public partial class TestInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -297,6 +297,21 @@ namespace OnlineStore.API.Migrations
                 table: "Photo",
                 columns: new[] { "Id", "IsMain", "ProductId", "Url" },
                 values: new object[] { 2, false, 1, "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Photo",
+                columns: new[] { "Id", "IsMain", "ProductId", "Url" },
+                values: new object[] { 3, true, 2, "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Photo",
+                columns: new[] { "Id", "IsMain", "ProductId", "Url" },
+                values: new object[] { 4, true, 3, "../../assets/img/candle.jpg" });
+
+            migrationBuilder.InsertData(
+                table: "Photo",
+                columns: new[] { "Id", "IsMain", "ProductId", "Url" },
+                values: new object[] { 5, true, 4, "../../assets/img/candle.jpg" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_UserId",

@@ -8,6 +8,7 @@ namespace OnlineStore.API.Dtos
         public int Id { get; set; }
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
+        public int CategoryId { get; set; }
         public double Cost { get; set; }
         public string ColorName { get; set; }
         public int MinQuantity { get; set; }
