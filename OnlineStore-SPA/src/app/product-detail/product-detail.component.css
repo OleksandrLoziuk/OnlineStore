@@ -1,0 +1,23 @@
+.btn{
+    background-color: black;
+    width: 100%;
+}
+.card{
+    border: 4px solid black;
+}
+
+.card-img-top{
+    border: 1px solid black;
+}
+
+.card-img-wrapper:hover img {
+    transform: scale(2.3, 2.3);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}
+
+.card-img-wrapper img {
+    transform: scale(1.0, 1.0);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+}

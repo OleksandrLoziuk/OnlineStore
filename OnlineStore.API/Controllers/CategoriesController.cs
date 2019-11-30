@@ -49,7 +49,7 @@ namespace OnlineStore.API.Controllers
         [HttpGet("{idcat}/{idprod}")]
         public async Task<IActionResult> GetProduct(int idcat, int idprod)
         {
-            var product = await _prRep.AllItems.Include(item => item.Color).Include(item => item.Category).FirstOrDefaultAsync(x => x.Id == idprod);
+            var product = await _prRep.AllItems.Include(item => item.Color).Include(item => item.Category).Include(item => item.Photos).FirstOrDefaultAsync(x => x.Id == idprod);
 
             var productToReturn = _mapper.Map<ProductForDetailedDto>(product);
 

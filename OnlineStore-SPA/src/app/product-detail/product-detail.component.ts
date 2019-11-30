@@ -12,6 +12,10 @@ import { CategoryService } from '../_services/category.service';
 })
 export class ProductDetailComponent implements OnInit {
   product: Product;
+  icon: string;
+  isAvText: string;
+  textColor: string;
+
   constructor(private route: ActivatedRoute, private categoryService: CategoryService, private alertify: AlertifyService) { }
 
   ngOnInit() {
@@ -24,4 +28,25 @@ export class ProductDetailComponent implements OnInit {
         this.alertify.error(error);
    });
   }
+  isAv() {
+    if (this.product.isAvailable) {
+      this.icon = 'check';
+      this.isAvText = 'В наличии';
+      this.textColor = 'text-success';
+      return true;
+    } else {
+       this.icon = 'times';
+       this.isAvText = 'Нет в наличии';
+       this.textColor = 'text-danger';
+       return true;
+    }
+ }
+ isPay() {
+  if (this.product.isAvailable) {
+    return false;
+  } else {
+   return true;
+  }
+ }
+
 }

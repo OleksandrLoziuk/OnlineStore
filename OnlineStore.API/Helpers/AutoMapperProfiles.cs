@@ -18,7 +18,7 @@ namespace OnlineStore.API.Helpers
                 opt.MapFrom(src => src.Color.ColorName);
             })
             .ForMember(dest => dest.PhotoUrl, opt => {
-                opt.MapFrom(src => src.Photos.FirstOrDefault(p=>p.IsMain).Url);
+                opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain && src.Id == p.ProductId).Url);
             });
             CreateMap<Photo, PhotoForDetailedDto>();
         }
