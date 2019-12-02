@@ -19,15 +19,18 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private categoryService: CategoryService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.loadProduct();
+    //this.loadProduct();
+    this.route.data.subscribe(data => {
+      this.product = data['product'];
+    });
   }
-  loadProduct() {
+  /*loadProduct() {
    this.categoryService.getProduct(+this.route.snapshot.params['catid'], +this.route.snapshot.params['prodid'])
    .subscribe((product: Product) => { this.product = product; },
    error => {
         this.alertify.error(error);
    });
-  }
+  }*/
   isAv() {
     if (this.product.isAvailable) {
       this.icon = 'check';
