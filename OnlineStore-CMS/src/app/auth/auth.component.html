@@ -1,0 +1,8 @@
+<div class="row justify-content-center">
+      <form #loginForm="ngForm" class="form-signin text-center" (ngSubmit)="login()">
+        <h1 class="h3 mb-3 mt-5 font-weight-normal">Вход</h1>
+        <input type="text" class="form-control" placeholder="Имя" name="username" #username="ngModel" required [(ngModel)]="model.username">
+        <input type="password" class="form-control mt-1" placeholder="Пароль" name="password" #password="ngModel" required [(ngModel)]="model.password">
+        <button class="btn btn-lg btn-dark btn-block mt-1" type="submit">Войти</button>
+      </form>
+  </div>

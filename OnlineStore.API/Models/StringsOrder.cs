@@ -1,3 +1,6 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace OnlineStore.API.Models
 {
     public class StringsOrder
@@ -7,7 +10,6 @@ namespace OnlineStore.API.Models
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public double Amount { get; set; }
-        public Order Order { get; set; }
         public int OrderId { get; set; }
     }
 }

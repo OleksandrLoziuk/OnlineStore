@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row head-tab text-light p-2 mb-1">
+        <div class="col-lg-4">Наименование</div>
+        <div class="col-lg-2 text-center">Количество</div>
+        <div class="col-lg-2 text-center">Цена</div>
+        <div class="col-lg-2 text-center">Сумма</div>
+        <div class="col-lg-2 text-center">Удалить</div>
+      </div>
+  <div *ngFor="let item of products"class="row tab-item p-2 mb-1">
+    <div class="col-lg-4 pt-1">{{item.productName}}</div>
+    <div class="col-lg-2 text-center pt-1">
+        <input class="quantity" type="number" [(ngModel)]="item.minQuantity" (ngModelChange)="onQuanChange($event)" /></div>
+    <div class="col-lg-2 text-center pt-1">{{item.cost}}</div>
+    <div class="col-lg-2 text-center pt-1">
+        <input class="amount" type="text" disabled [(ngModel)]="item.minQuantity*item.cost" />
+    </div>
+    <div class="col-lg-2 text-center">
+      <button class="btn btn-dark btn-del" (click)="del(item.id)"><i class="fa fa-ban"></i></button>
+  </div>
+  </div>
+  <div class="row  foot-tab mt-3">
+    <div class="col-lg-4 p-2 text-left">
+        <button class="btn btn-dark" type="button" (click)="cancel()">Продолжить покупки</button>
+    </div>
+    <div class="col-lg-4 p-2 text-right">
+        <button class="btn btn-dark" type="button" [disabled]="isOrder()" (click)="toOrder()" [routerLink]="['/order']" >Оформить зказ</button>
+    </div>
+    <div class="col-lg-4 sum text-center">
+      <label for="">Сумма заказа:</label>
+      <input class="amount text-center pt-2" type="text" disabled [(ngModel)]="currentsum" />
+    </div>
+  </div>
+</div>

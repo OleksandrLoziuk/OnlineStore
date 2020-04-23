@@ -1,0 +1,41 @@
+.tab-item {
+    border-radius: 4px;
+    border: 2px solid black;
+    font-weight: bolder;
+}
+.tab-item input {
+    width: 50%;
+    text-align: center;
+}
+
+.head-tab {
+    background-color: black;
+    border-radius: 4px;
+}
+.quantity{
+    border-radius: 4px;
+    border: 1px solid black;
+}
+.amount{
+    border: 0;
+    background-color: white;
+    font-weight: bold;
+    color: black;
+}
+.sum{
+    border: 2px solid black;
+    font-weight: bolder;
+    border-radius: 4px;
+}
+.foot-tab input {
+    width: 50%;
+}
+.btn {
+    background-color: black;
+}
+.sum input {
+    font-size: larger;
+}
+.btn-del{
+    border-radius: 30px;
+}

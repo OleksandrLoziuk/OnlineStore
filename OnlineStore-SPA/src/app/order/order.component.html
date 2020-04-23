@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <form #registerForm="ngForm" (ngSubmit)="addOrder()">
+    <h2 class="text-center text-primary text-dark">Оформление заказа</h2><hr>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="ClientSurname" [(ngModel)]="model.ClientSurname" placeholder="Фамилия">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="ClientName" [(ngModel)]="model.ClientName" placeholder="Имя">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="Patronymic" [(ngModel)]="model.Patronymic" placeholder="Отчество">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="PhoneNumber" [(ngModel)]="model.PhoneNumber" placeholder="Номер телефона">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="Email" [(ngModel)]="model.Email" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <label>Выбрать перевозщика:</label>
+      <select [(ngModel)]="model.DeliveryMethod" (change) = "ChangeValueDelivery($event)" class="form-control" required>
+        <option *ngFor="let item of deliveries" [ngValue]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" required name="model.Place" [(ngModel)]="model.Place" placeholder="Населённый пункт">
+    </div>
+    <div class="form-group">
+      <input type="number" class="form-control" required name="model.PlaceNumber" [(ngModel)]="model.PlaceNumber" placeholder="Номер отделения">
+    </div>
+    <div class="form-group">
+      <label>Выбрать метод оплаты:</label>
+      <select [(ngModel)]="model.PaymentMethod" (change) = "ChangeValuePayment($event)" class="form-control" required>
+        <option *ngFor="let item of payments" [ngValue]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-dark" type="submit">Оформить заказ</button>
+      <button class="btn btn-default" type="button" (click)="cancel()">Отмена</button>
+    </div>
+  </form>
+  </div>

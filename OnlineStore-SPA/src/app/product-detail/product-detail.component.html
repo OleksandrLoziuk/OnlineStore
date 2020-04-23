@@ -1,6 +1,6 @@
 <div class="container-fluid mt-2 mb-2">
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <div class="card">
         <div class="card-img-wrapper p-1">
           <img src="{{product.photoUrl}}" alt="{{product.productName}}" class="card-img-top ">
@@ -11,22 +11,23 @@
           </div>
           <div>
               <h6 class="card-text pr-1">Цена - {{product.cost}} грн.</h6>
-              <p>Остаток на скаладе - {{product.balance}} шт.</p>
               <p *ngIf="isAv()" class="card-text pl-1 {{textColor}}"><i class="fa fa-{{icon}}"></i>{{isAvText}}</p> 
-              <p>Минимальный заказ - {{product?.minQuantity}} шт.</p>
-              <button [disabled]="isPay()" class="btn  btn-dark">Купить<i class="fa fa-shopping-cart ml-1"></i></button>
+              <p>Минимальный заказ - {{product.minQuantity}} шт.</p>
+              <button [disabled]="isPay()" (click)="toCart()" class="btn  btn-dark">Купить<i class="fa fa-shopping-cart ml-1"></i></button>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-9">
       <div class="tab-panel">
         <tabset class ="product-tabset">
           <tab heading="Описание">
             <p>{{product.description}}</p>
           </tab>
           <tab heading="Фото">
-            Тут будут фото
+            <div class="text-center">
+             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+            </div>
           </tab>
         </tabset>
       </div>

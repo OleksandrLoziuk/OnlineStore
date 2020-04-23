@@ -1,0 +1,12 @@
+.footer {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+a {
+    color: white;
+} 

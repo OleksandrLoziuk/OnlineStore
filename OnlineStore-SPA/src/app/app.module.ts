@@ -3,13 +3,12 @@ import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { AuthService } from './_services/auth.service';
 import { HeaderComponent } from './header/header.component';
-import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
@@ -26,13 +25,19 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { CategoryDetailResolver } from './resolvers/category-detail.resolver';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailResolver } from './resolvers/product-detail.resolver';
+import { StringsOrderService } from './_services/stringsOrder.service';
+import { ShopCartComponent } from './shop-cart/shop-cart.component';
+import { OrderComponent } from './order/order.component';
+import { OrderService } from './_services/order.service';
+import { EndComponent } from './end/end.component';
+import { FooterComponent } from './footer/footer.component';
+
 
 @NgModule({
    declarations: [
       AppComponent,
       NavComponent,
       HeaderComponent,
-      RegisterComponent,
       HomeComponent,
       AboutComponent,
       ContactsComponent,
@@ -43,23 +48,29 @@ import { ProductDetailResolver } from './resolvers/product-detail.resolver';
       CategoryCardComponent,
       CategoryDetailComponent,
       ProductCardComponent,
-      ProductDetailComponent
+      ProductDetailComponent,
+      ShopCartComponent,
+      OrderComponent,
+      EndComponent,
+      FooterComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
+      NgxGalleryModule,
       FormsModule,
       TabsModule.forRoot(),
       BsDropdownModule.forRoot()
    ],
    providers: [
-      AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
       CategoryService,
+      StringsOrderService,
       CategoryDetailResolver,
-      ProductDetailResolver
+      ProductDetailResolver,
+      OrderService
    ],
    bootstrap: [
       AppComponent

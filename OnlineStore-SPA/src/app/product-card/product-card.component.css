@@ -7,6 +7,7 @@
 }
 .card-img-top{
     border: 1px solid black;
+    max-height: 600px;
 }
 
 .card:hover img {
@@ -20,11 +21,11 @@
     transition-duration: 200ms;
     transition-timing-function: ease-out;
 }
+
 .card-img-wrapper {
     overflow: hidden;
     position: relative;
 }
-
 .prod-icons {
     position: absolute;
     bottom: -30%;

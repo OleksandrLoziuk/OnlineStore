@@ -17,12 +17,12 @@
     <li class="nav-item mr-3 ml-3" routerLinkActive="active">
       <a class="nav-link text-light" [routerLink]="['/payment']">Оплата</a>
     </li>
-    <li class="nav-item mr-3 ml-3" routerLinkActive="active">
+    <!--<li class="nav-item mr-3 ml-3" routerLinkActive="active">
       <a class="nav-link text-light" [routerLink]="['/reviews']">Отзывы</a>
-    </li>
+    </li>-->
   </ul>
   
-  <div *ngIf="loggedIn()" class="dropdown" dropdown>
+  <!--<div *ngIf="loggedIn()" class="dropdown" dropdown>
     <a class="dropdown-toggle text-light" dropdownToggle>Добро пожаловать, {{authService.decodedToken.unique_name | titlecase}}</a>
     <div class="dropdown-menu" *dropdownMenu>
       <a class="dropdown-item" href="#">Мои заказы</a>
@@ -38,7 +38,8 @@
     placeholder="Пароль" required [(ngModel)]="model.password">
     <button [disabled]="!loginForm.valid" class="btn btn-dark my-2 my-sm-0" type="submit">Войти</button>
     <button  class="btn btn-dark my-2 my-sm-0 ml-1" type="button" [routerLink]="['/register']" routerLinkActive="router-link-active" >Регистрация</button>
-  </form>
+  </form>-->
+  <button  class="btn btn-dark my-2 my-sm-0 ml-1 btn-cart" type="button" [routerLink]="['/cart']" routerLinkActive="router-link-active"><i class="fa fa-shopping-cart"></i></button>
  </div>
    
 </nav>

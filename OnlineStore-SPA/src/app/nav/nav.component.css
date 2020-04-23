@@ -4,3 +4,6 @@
 .dropdown-toggle, .dropdown-item {
     cursor: pointer;
 }
+.btn-cart {
+    border-radius: 30px;
+}

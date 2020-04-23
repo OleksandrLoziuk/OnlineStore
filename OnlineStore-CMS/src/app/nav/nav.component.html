@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand">Склад</a>
+
+  <div class="navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/balance']">Баланс</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/receipt']">Приход</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/consumption']">Расход</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/orders']">Заказы</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/categories']">Категории</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']">Товары</a>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-danger" (click)="logout()">Выход</button>
+      </li>
+    </ul>>   
+  </div>
+  
+</nav>

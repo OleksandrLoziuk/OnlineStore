@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../_models/Product';
+import { StringsOrderService } from '../_services/stringsOrder.service';
 
 @Component({
   selector: 'app-product-card',
@@ -11,7 +12,7 @@ export class ProductCardComponent implements OnInit {
   icon: string;
   isAvText: string;
   textColor: string;
-  constructor() { }
+  constructor(private stringsOrederService: StringsOrderService) { }
 
   ngOnInit() {
   }
@@ -34,5 +35,8 @@ export class ProductCardComponent implements OnInit {
   } else {
    return true;
   }
+ }
+ toCart(){
+   this.stringsOrederService.addProduct(this.product);
  }
 }

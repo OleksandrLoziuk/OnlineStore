@@ -8,6 +8,7 @@
 
 .card-img-top{
     border: 1px solid black;
+    max-height: 600px;
 }
 
 .card-img-wrapper:hover img {
@@ -22,4 +23,7 @@
     transition-timing-function: ease-out;
 }
 
-
+.card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+}

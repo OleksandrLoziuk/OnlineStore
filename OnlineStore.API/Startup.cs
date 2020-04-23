@@ -45,6 +45,9 @@ namespace OnlineStore.API
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IStringsOrderRepository, StringsOrderRepository>();
+            services.AddTransient<IClientRepository, ClientRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
