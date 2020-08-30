@@ -6,7 +6,7 @@ namespace OnlineStore.API.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string PhotoUrl { get; set; }
+        public PhotoCategory photoCategory { get; set; } 
         public ICollection<Product> Products { get; set; }
     }
 }

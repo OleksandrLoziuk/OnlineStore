@@ -12,7 +12,7 @@ namespace OnlineStore.API.Helpers
             CreateMap<Product, ProductForListDto>()
             .ForMember(dest => dest.PhotoUrl, opt => {
                 opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
-            });;
+            });
             CreateMap<Product, ProductForDetailedDto>()
             .ForMember(dest => dest.ColorName, opt => {
                 opt.MapFrom(src => src.Color.ColorName);
@@ -20,7 +20,18 @@ namespace OnlineStore.API.Helpers
             .ForMember(dest => dest.PhotoUrl, opt => {
                 opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
             });
+            CreateMap<Category, CategoryForListDto>()
+            .ForMember(dest => dest.photoUrl, opt => { 
+                opt.MapFrom(src => src.photoCategory.Url); 
+            });
+            CreateMap<Category, CategoryToReturnDto>()
+            .ForMember(dest => dest.photoUrl, opt => { 
+                opt.MapFrom(src => src.photoCategory.Url); 
+            });
             CreateMap<Photo, PhotoForDetailedDto>();
+            CreateMap<PhotoCategory, PhotoCategoryForReturnDto>();
+            CreateMap<PhotoCategoryForCreationDto, PhotoCategory>();
+            CreateMap<CategoryForCreationDto, Category>();
         }
     }
 }

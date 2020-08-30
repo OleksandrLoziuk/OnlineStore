@@ -23,8 +23,6 @@ namespace OnlineStore.API.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("PhotoUrl");
-
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -99,6 +97,8 @@ namespace OnlineStore.API.Migrations
 
                     b.Property<int>("ProductId");
 
+                    b.Property<string>("PublicId");
+
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
@@ -106,6 +106,25 @@ namespace OnlineStore.API.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("OnlineStore.API.Models.PhotoCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<string>("PublicId");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId")
+                        .IsUnique();
+
+                    b.ToTable("PhotoCategory");
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.Product", b =>
@@ -187,6 +206,14 @@ namespace OnlineStore.API.Migrations
                     b.HasOne("OnlineStore.API.Models.Product", "Product")
                         .WithMany("Photos")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OnlineStore.API.Models.PhotoCategory", b =>
+                {
+                    b.HasOne("OnlineStore.API.Models.Category", "Category")
+                        .WithOne("photoCategory")
+                        .HasForeignKey("OnlineStore.API.Models.PhotoCategory", "CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

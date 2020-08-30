@@ -1,27 +1,27 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand">Склад</a>
+  <a class="navbar-brand" [routerLink]="['/welcomepage']">Склад</a>
 
   <div class="navbar-collapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/balance']">Баланс</a>
+        <a class="nav-link" [routerLink]="['/balanceadmin']">Баланс</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/receipt']">Приход</a>
+        <a class="nav-link" [routerLink]="['/receiptadmin']">Приход</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/consumption']">Расход</a>
+        <a class="nav-link" [routerLink]="['/consumptionadmin']">Расход</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/orders']">Заказы</a>
+        <a class="nav-link" [routerLink]="['/ordersadmin']">Заказы</a>
       </li>
     </ul>
     <ul class="navbar-nav ">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/categories']">Категории</a>
+        <a class="nav-link" [routerLink]="['/categoriesadmin']">Категории</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/products']">Товары</a>
+        <a class="nav-link" [routerLink]="['/productsadmin']">Товары</a>
       </li>
       <li class="nav-item">
         <button type="button" class="btn btn-danger" (click)="logout()">Выход</button>

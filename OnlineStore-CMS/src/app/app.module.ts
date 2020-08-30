@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +22,21 @@ import { ConsumptionListComponent } from './consumption-list/consumption-list.co
 import { OrdersListComponent } from './orders-list/orders-list.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
+import { CategoriesService } from './_services/categories.service';
+import { AuthGuard } from './_guards/auth.guard';
+import { CategoriesListResolver } from './_resolvers/categories-list.resolver';
+import { CategoryAddComponent } from './category-add/category-add.component';
+import { PhotocategoryEditorComponent } from './photocategory-editor/photocategory-editor.component';
+import { CategoryEditComponent } from './category-edit/category-edit.component';
+import { CategoriesEditResolver } from './_resolvers/categories-edit.resolver';
+import { WelcomepageComponent } from './welcomepage/welcomepage.component';
+
+
+
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -34,18 +51,34 @@ import { AlertifyService } from './_services/alertify.service';
       BalanceComponent,
       ReceiptListComponent,
       ConsumptionListComponent,
-      OrdersListComponent
+      OrdersListComponent,
+      CategoryAddComponent,
+      PhotocategoryEditorComponent,
+      CategoryEditComponent,
+      WelcomepageComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      FileUploadModule,
+      JwtModule.forRoot({
+         config: {
+            tokenGetter: tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      })
    ],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
-      AlertifyService
+      AlertifyService,
+      AuthGuard,
+      CategoriesService,
+      CategoriesListResolver,
+      CategoriesEditResolver,
    ],
    bootstrap: [
       AppComponent

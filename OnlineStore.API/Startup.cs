@@ -41,6 +41,7 @@ namespace OnlineStore.API
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -48,6 +49,7 @@ namespace OnlineStore.API
             services.AddTransient<IStringsOrderRepository, StringsOrderRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IPhotoCategoryRepository, PhotoCategoryRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters

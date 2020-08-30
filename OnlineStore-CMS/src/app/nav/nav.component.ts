@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../_services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -8,14 +11,16 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class NavComponent implements OnInit {
 
-  constructor(private alertify: AlertifyService) { }
-
+  constructor(private alertify: AlertifyService, private router: Router, private authService: AuthService) { }
+  baseUrl = environment.apiUrl;
   ngOnInit() {
   }
 
-  logout(){   
+  logout(){ 
     localStorage.removeItem('token');
+    this.authService.decodedToken = null;
     this.alertify.success('Пока!');
+    this.router.navigate(['/welcomepage']);  
   }
 
 }

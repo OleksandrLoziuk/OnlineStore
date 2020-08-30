@@ -12,7 +12,7 @@
         <input class="quantity" type="number" [(ngModel)]="item.minQuantity" (ngModelChange)="onQuanChange($event)" /></div>
     <div class="col-lg-2 text-center pt-1">{{item.cost}}</div>
     <div class="col-lg-2 text-center pt-1">
-        <input class="amount" type="text" disabled [(ngModel)]="item.minQuantity*item.cost" />
+        <input class="amount" type="text" disabled [(ngModel)]="item.minQuantity*item.cost"/>
     </div>
     <div class="col-lg-2 text-center">
       <button class="btn btn-dark btn-del" (click)="del(item.id)"><i class="fa fa-ban"></i></button>
