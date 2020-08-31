@@ -5,6 +5,8 @@ import { AlertifyService } from '../_services/alertify.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { Photocategory } from '../_models/Photocategory';
+import { Category } from '../_models/Category';
+
 
 @Component({
   selector: 'app-category-add',
@@ -14,10 +16,41 @@ import { Photocategory } from '../_models/Photocategory';
 export class CategoryAddComponent implements OnInit {
   model: any = {};
   baseUrl = environment.apiUrl;
+  req: Category = null;
+  uploader: FileUploader;
+  hasBaseDropZoneOver = false;
+  isNameAdded: boolean = false;
 
   constructor(private router: Router, private categoriesService: CategoriesService, private alertify: AlertifyService) { }
 
   ngOnInit() {
+    
+  }
+  initializeUploader() {
+    this.uploader = new FileUploader({
+      url: this.baseUrl + 'categoriesadmin/' + this.req.id + '/photocategory',
+      authToken: 'Bearer ' + localStorage.getItem('token'),
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 10*1024*1024
+    });
+    this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
+    /*this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if(response) {
+        const res: Photocategory = JSON.parse(response);
+        const photo = {
+          id: res.id,
+          url: res.url
+        };
+        this.category.photoUrl = photo.url;
+      }
+    }*/
+  }
+
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
   }
 
   back() {
@@ -25,11 +58,15 @@ export class CategoryAddComponent implements OnInit {
   }
 
   addCategory() {
-      this.categoriesService.add(this.model).subscribe(() => {
+      this.categoriesService.add(this.model).subscribe((data:Category) => {
         this.alertify.success("Катигория добавлена");
-        this.router.navigate(['/categoriesadmin']);
+        this.req = data;
+        this.isNameAdded = true;
+        this.initializeUploader();
+        //this.router.navigate(['/categoriesadmin']);
       }, error => {
         this.alertify.error(error);
+        this.isNameAdded = false;
       });
   }
 }

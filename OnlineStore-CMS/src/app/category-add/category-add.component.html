@@ -7,13 +7,87 @@
         <input type="text" class="form-control" required name="model.name" [(ngModel)]="model.name" placeholder="Введите название категории:">
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-success mr-1">Добавить</button>
-        <button class="btn btn-secondary ml-1" type="button" (click)="back()">Отмена</button>
+        <button [disabled]="!registerForm.dirty" type="submit" class="btn btn-success mr-1">Добавить</button>
+        <button class="btn btn-secondary ml-1" type="button" (click)="back()">Назад</button>
       </div>
     </form>
   </div>
+</div>
+  
+<div *ngIf="isNameAdded" class="row">
+  <div class="col-lg-12">
+    <h2 class="text-center text-primary text-dark">Добавление фото категории</h2><hr>
+  </div>
+  <div class="col-lg-12 upload ">
+    <div class="row mt-3">
+ 
+      <div class="col-md-3">
+  
+          <h5>Выбор файла:</h5>
+  
+          <div ng2FileDrop
+               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+               (fileOver)="fileOverBase($event)"
+               [uploader]="uploader"
+               class="card bg-faded p-3 text-center mb-3 my-drop-zone">
+               <i class="fa fa-upload fa-3x"></i>
+               Перетащить фото сюда
+          </div>
+  
+         <!-- Multiple
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple  /><br/> -->
+  
+          <input type="file" class="upload-btn btn" ng2FileSelect [uploader]="uploader" />
+      </div>
+  
+      <div class="col-md-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
+  
+          <h3>Загрузка файла:</h3>
+          <p>Количество: {{ uploader?.queue?.length }}</p>
+  
+          <table class="table">
+              <thead>
+              <tr>
+                  <th width="50%">Имя:</th>
+                  <th>Размер</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                  <td><strong>{{ item?.file?.name }}</strong></td>
+                  <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              </tr>
+              </tbody>
+          </table>
+  
+          <div>
+              <div>
+                  Прогресс загрузки:
+                  <div class="progress mb-4" style="">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                  </div>
+              </div>
+              <button type="button" class="btn btn-success btn-s mr-1"
+                      (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                  <span class="fa fa-upload"></span> Загрузить
+              </button>
+              <!--<button type="button" class="btn btn-warning btn-s mr-1"
+                      (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                  <span class="fa fa-ban"></span> Отмена
+              </button> -->
+              <button type="button" class="btn btn-danger btn-s"
+                      (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                  <span class="fa fa-trash"></span> Удалить
+              </button>
+          </div>
+  
+      </div>
+  
+  </div>
+  </div>
  </div>
 </div>
+
 
 
 

@@ -60,6 +60,7 @@ namespace OnlineStore.API.Controllers
                 var categoryToCreation = _mapper.Map<Category>(categoryForCreationDto);
                 if(await _repo.AddItemAsync(categoryToCreation))
                 {
+                    
                     PhotoCategory photo = new PhotoCategory()
                     {
                         Url = "https://res.cloudinary.com/alcloud/image/upload/v1598367896/%D0%BD%D0%BE%D0%B2%D0%B8%D0%BD%D0%BA%D0%B0_xydkxl_qkwog8.jpg",
@@ -67,7 +68,9 @@ namespace OnlineStore.API.Controllers
                     };
                     if(await _repoPhoto.AddItemAsync(photo))
                     {
-                        return Ok();
+                       var catRet = _mapper.Map<CategoryToReturnDto>(categoryToCreation);
+                       return Ok(catRet);
+                        
                     }
                 }
             }
