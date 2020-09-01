@@ -13,7 +13,8 @@ import { CategoryAddComponent } from './category-add/category-add.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoriesEditResolver } from './_resolvers/categories-edit.resolver';
 import { WelcomepageComponent } from './welcomepage/welcomepage.component';
-import { PhotocategoryEditorComponent } from './photocategory-editor/photocategory-editor.component';
+import { ProductsListResolver } from './_resolvers/products-list.resolver';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 
 
@@ -23,10 +24,11 @@ const routes: Routes = [
   {path: 'receiptadmin', component: ReceiptListComponent},
   {path: 'consumptionadmin', component: ConsumptionListComponent},
   {path: 'categoriesadmin', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
-  {path: 'productsadmin', component: ProductsListComponent},
+  {path: 'productsadmin', component: ProductsListComponent, resolve: {products: ProductsListResolver}},
+  {path: 'productsadmin/add', component: ProductAddComponent, resolve: {categories: CategoriesListResolver}},
   {path: 'ordersadmin', component: OrdersListComponent},
   {path: 'categoriesadmin/add', component: CategoryAddComponent},
-  {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent,resolve: {category: CategoriesEditResolver}},
+  {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent, resolve: {category: CategoriesEditResolver}}
 ];
 
 @NgModule({

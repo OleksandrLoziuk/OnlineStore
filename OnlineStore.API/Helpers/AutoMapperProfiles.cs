@@ -29,9 +29,11 @@ namespace OnlineStore.API.Helpers
                 opt.MapFrom(src => src.photoCategory.Url); 
             });
             CreateMap<Photo, PhotoForDetailedDto>();
+            CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoCategory, PhotoCategoryForReturnDto>();
             CreateMap<PhotoCategoryForCreationDto, PhotoCategory>();
             CreateMap<CategoryForCreationDto, Category>();
+            CreateMap<PhotoForCreationDto, Photo>();
         }
     }
 }

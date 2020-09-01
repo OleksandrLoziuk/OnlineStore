@@ -15,7 +15,6 @@ import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { WorkspaceComponent } from './workspace/workspace.component';
 import { CategoriesListComponent } from './categories-list/categories-list.component';
-import { ProductsListComponent } from './products-list/products-list.component';
 import { BalanceComponent } from './balance/balance.component';
 import { ReceiptListComponent } from './receipt-list/receipt-list.component';
 import { ConsumptionListComponent } from './consumption-list/consumption-list.component';
@@ -30,6 +29,10 @@ import { PhotocategoryEditorComponent } from './photocategory-editor/photocatego
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { CategoriesEditResolver } from './_resolvers/categories-edit.resolver';
 import { WelcomepageComponent } from './welcomepage/welcomepage.component';
+import { ProductsListComponent } from './products-list/products-list.component';
+import { ProductsService } from './_services/products.service';
+import { ProductsListResolver } from './_resolvers/products-list.resolver';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 
 
@@ -39,7 +42,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-   declarations: [
+   declarations: [		
       AppComponent,
       NavComponent,
       AuthComponent,
@@ -47,7 +50,6 @@ export function tokenGetter() {
       HomeComponent,
       WorkspaceComponent,
       CategoriesListComponent,
-      ProductsListComponent,
       BalanceComponent,
       ReceiptListComponent,
       ConsumptionListComponent,
@@ -55,7 +57,9 @@ export function tokenGetter() {
       CategoryAddComponent,
       PhotocategoryEditorComponent,
       CategoryEditComponent,
-      WelcomepageComponent
+      WelcomepageComponent,
+      ProductsListComponent,
+      ProductAddComponent
    ],
    imports: [
       BrowserModule,
@@ -79,6 +83,8 @@ export function tokenGetter() {
       CategoriesService,
       CategoriesListResolver,
       CategoriesEditResolver,
+      ProductsService,
+      ProductsListResolver
    ],
    bootstrap: [
       AppComponent

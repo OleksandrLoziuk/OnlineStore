@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { AlertifyService } from './alertify.service';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Category } from '../_models/Category';
-import { catchError } from 'rxjs/operators';
-import { Photocategory } from '../_models/Photocategory';
-import { Config } from 'protractor';
+
 
 
 @Injectable({
@@ -16,7 +13,7 @@ export class CategoriesService {
   baseUrl = environment.apiUrl;
   configUrl: any ={};
 
-constructor(private http: HttpClient, private alertify: AlertifyService) { }
+constructor(private http: HttpClient) { }
 
 getCategories(): Observable<Category[]> {
   return this.http.get<Category[]>(this.baseUrl + 'categoriesadmin');

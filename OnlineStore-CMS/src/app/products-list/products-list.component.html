@@ -1,3 +1,22 @@
-<p>
-  products-list works!
-</p>
+<table class="table mt-4">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Название</th>
+      <th scope="col">Катигория</th>
+      <th scope="col">Цена</th>
+      <th scope="col" class="text-right"><button class="btn btn-success" [routerLink]="['/productsadmin/add']"><i class="fa fa-plus"></i></button></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of products">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.productName}}</td>
+      <td>{{item.categoryName}}</td>
+      <td>{{item.cost}}</td>
+      <td class="text-right"><button class="btn btn-danger" (click)="deleteProduct(item)"><i class="fa fa-trash"></i></button></td>
+      <td><button class="btn btn-primary" [routerLink]="['/productsadmin/'+ item.id +'/edit']"><i class="fa fa-edit"></i></button></td>
+    </tr>
+  </tbody>
+</table>
