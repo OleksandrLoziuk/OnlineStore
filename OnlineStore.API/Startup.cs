@@ -50,6 +50,8 @@ namespace OnlineStore.API
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IPhotoCategoryRepository, PhotoCategoryRepository>();
+            services.AddTransient<IPhotoRepository, PhotoRepository>();
+            services.AddTransient<IColorRepository, ColorRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters

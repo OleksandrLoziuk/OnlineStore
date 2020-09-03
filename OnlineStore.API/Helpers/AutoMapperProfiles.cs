@@ -34,6 +34,7 @@ namespace OnlineStore.API.Helpers
             CreateMap<PhotoCategoryForCreationDto, PhotoCategory>();
             CreateMap<CategoryForCreationDto, Category>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<ColorForCreationDto, Color>();
         }
     }
 }

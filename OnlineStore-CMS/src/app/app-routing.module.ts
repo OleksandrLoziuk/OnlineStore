@@ -15,6 +15,7 @@ import { CategoriesEditResolver } from './_resolvers/categories-edit.resolver';
 import { WelcomepageComponent } from './welcomepage/welcomepage.component';
 import { ProductsListResolver } from './_resolvers/products-list.resolver';
 import { ProductAddComponent } from './product-add/product-add.component';
+import { ColorsListReolver } from './_resolvers/colors-list.resolver';
 
 
 
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path: 'consumptionadmin', component: ConsumptionListComponent},
   {path: 'categoriesadmin', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
   {path: 'productsadmin', component: ProductsListComponent, resolve: {products: ProductsListResolver}},
-  {path: 'productsadmin/add', component: ProductAddComponent, resolve: {categories: CategoriesListResolver}},
+  {path: 'productsadmin/add', component: ProductAddComponent, resolve: {categories: CategoriesListResolver, colors: ColorsListReolver}, },
   {path: 'ordersadmin', component: OrdersListComponent},
   {path: 'categoriesadmin/add', component: CategoryAddComponent},
   {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent, resolve: {category: CategoriesEditResolver}}

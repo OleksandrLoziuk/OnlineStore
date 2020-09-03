@@ -69,4 +69,5 @@ export class CategoryAddComponent implements OnInit {
         this.isNameAdded = false;
       });
   }
+ 
 }
