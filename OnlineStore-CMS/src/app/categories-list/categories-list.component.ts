@@ -31,10 +31,12 @@ export class CategoriesListComponent implements OnInit {
   }*/
 
   deleteCategory(cat: Category) {
-    this.categoriesService.deleteCategory(cat.id).subscribe();
-    this.categories.splice(this.categories.findIndex(c => c.id === cat.id), 1);
-    this.alertify.success('Категория удалена');
- 
+    this.categoriesService.deleteCategory(cat.id).subscribe(() => {
+      this.categories.splice(this.categories.findIndex(c => c.id === cat.id), 1);
+      this.alertify.success('Категория удалена');
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
 }

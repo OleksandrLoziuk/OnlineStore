@@ -25,8 +25,8 @@ addColor(model: any) {
   return this.httpClient.post(this.baseUrl + 'colors/', model);
 }
 
-deleteColor(id): Observable<Color> {
-  return this.httpClient.delete<Color>(this.baseUrl + 'colors/' + id);
+deleteColor(id: number ) {
+  return this.httpClient.delete(this.baseUrl + 'colors/' + id);
 }
 
 }

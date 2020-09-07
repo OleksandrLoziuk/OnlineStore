@@ -35,6 +35,8 @@ import { ProductsListResolver } from './_resolvers/products-list.resolver';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ColorService } from './_services/color.service';
 import { ColorsListReolver } from './_resolvers/colors-list.resolver';
+import { ColorsListComponent } from './colors-list/colors-list.component';
+import { ColorsAddComponent } from './colors-add/colors-add.component';
 
 
 
@@ -45,7 +47,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-   declarations: [			
+   declarations: [					
       AppComponent,
       NavComponent,
       AuthComponent,
@@ -63,6 +65,8 @@ export function tokenGetter() {
       WelcomepageComponent,
       ProductsListComponent,
       ProductAddComponent,
+      ColorsListComponent,
+      ColorsAddComponent
    ],
    imports: [
       BrowserModule,
@@ -89,7 +93,7 @@ export function tokenGetter() {
       ProductsService,
       ProductsListResolver,
       ColorService,
-      ColorsListReolver
+      ColorsListReolver,
    ],
    bootstrap: [
       AppComponent

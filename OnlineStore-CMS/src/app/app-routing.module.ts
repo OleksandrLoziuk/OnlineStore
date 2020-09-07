@@ -16,6 +16,8 @@ import { WelcomepageComponent } from './welcomepage/welcomepage.component';
 import { ProductsListResolver } from './_resolvers/products-list.resolver';
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ColorsListReolver } from './_resolvers/colors-list.resolver';
+import { ColorsListComponent } from './colors-list/colors-list.component';
+import { ColorsAddComponent } from './colors-add/colors-add.component';
 
 
 
@@ -29,7 +31,9 @@ const routes: Routes = [
   {path: 'productsadmin/add', component: ProductAddComponent, resolve: {categories: CategoriesListResolver, colors: ColorsListReolver}, },
   {path: 'ordersadmin', component: OrdersListComponent},
   {path: 'categoriesadmin/add', component: CategoryAddComponent},
-  {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent, resolve: {category: CategoriesEditResolver}}
+  {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent, resolve: {category: CategoriesEditResolver}},
+  {path: 'colors', component: ColorsListComponent, resolve: {colors: ColorsListReolver} },
+  {path: 'colors/add', component: ColorsAddComponent}
 ];
 
 @NgModule({

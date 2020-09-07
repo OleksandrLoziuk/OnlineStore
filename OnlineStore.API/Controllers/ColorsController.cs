@@ -16,9 +16,11 @@ namespace OnlineStore.API.Controllers
     {
         private readonly IColorRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IProductRepository _prodRepo;
 
-        public ColorsController(IColorRepository repo, IMapper mapper)
+        public ColorsController(IColorRepository repo, IMapper mapper, IProductRepository prodRepo)
         {
+            _prodRepo = prodRepo;
             _mapper = mapper;
             _repo = repo;
         }
@@ -40,26 +42,32 @@ namespace OnlineStore.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddColor(ColorForCreationDto colorForCreationDto)
         {
-            if(colorForCreationDto.ColorName == null)
+            if (colorForCreationDto.ColorName == null)
                 return BadRequest("Нет названия цвета");
             var colorToCreate = _mapper.Map<Color>(colorForCreationDto);
 
             var colorFromRepo = await _repo.AllItems.FirstOrDefaultAsync(p => p.ColorName == colorToCreate.ColorName);
 
-            if(colorFromRepo != null)
+            if (colorFromRepo != null)
                 return BadRequest("Уже существует");
 
             if (await _repo.AddItemAsync(colorToCreate))
                 return Ok(colorToCreate);
-            
+
             return BadRequest();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> deleteColor(int id)
+        public async Task<IActionResult> DeleteColor(int id)
         {
-            if(await _repo.DeleteItemAsync(id))
-                return Ok("Цвет удалён");
+            var checkColorInProducts = await _prodRepo.AllItems.FirstOrDefaultAsync(p => p.ColorId == id);
+            if(checkColorInProducts == null)
+            {
+                if (await _repo.DeleteItemAsync(id))
+                {
+                    return Ok();
+                }
+            }
             return BadRequest("Что то пошло не так");
         }
 

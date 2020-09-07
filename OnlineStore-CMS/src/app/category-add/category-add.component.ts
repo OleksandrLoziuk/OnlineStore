@@ -37,16 +37,12 @@ export class CategoryAddComponent implements OnInit {
       maxFileSize: 10*1024*1024
     });
     this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
-    /*this.uploader.onSuccessItem = (item, response, status, headers) => {
+
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
       if(response) {
-        const res: Photocategory = JSON.parse(response);
-        const photo = {
-          id: res.id,
-          url: res.url
-        };
-        this.category.photoUrl = photo.url;
+        this.router.navigate(['/categoriesadmin']);
       }
-    }*/
+    }
   }
 
   fileOverBase(e: any): void {
@@ -63,7 +59,7 @@ export class CategoryAddComponent implements OnInit {
         this.req = data;
         this.isNameAdded = true;
         this.initializeUploader();
-        //this.router.navigate(['/categoriesadmin']);
+        
       }, error => {
         this.alertify.error(error);
         this.isNameAdded = false;

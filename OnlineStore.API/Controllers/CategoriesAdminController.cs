@@ -23,11 +23,20 @@ namespace OnlineStore.API.Controllers
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _repo;
         private readonly IPhotoCategoryRepository _repoPhoto;
-        public CategoriesAdminController(ICategoryRepository repo, IPhotoCategoryRepository repoPhoto , IMapper mapper)
+        private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
+        private Cloudinary _cloudinary;
+        public CategoriesAdminController(ICategoryRepository repo, IPhotoCategoryRepository repoPhoto, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _repo = repo;
             _repoPhoto = repoPhoto;
             _mapper = mapper;
+            _cloudinaryConfig = cloudinaryConfig;
+            Account acc = new Account(
+                _cloudinaryConfig.Value.CloudName,
+                _cloudinaryConfig.Value.ApiKey,
+                _cloudinaryConfig.Value.ApiSecret
+            );
+            _cloudinary = new Cloudinary(acc);
         }
         [HttpGet]
         public async Task<IActionResult> GetCategories()
@@ -36,7 +45,7 @@ namespace OnlineStore.API.Controllers
             var categoriesToReturn = _mapper.Map<IEnumerable<CategoryForListDto>>(categories);
             return Ok(categoriesToReturn);
         }
-        
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
@@ -49,59 +58,52 @@ namespace OnlineStore.API.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddCategory(CategoryForCreationDto categoryForCreationDto)
         {
-            if(categoryForCreationDto != null)
+            if (categoryForCreationDto != null)
             {
                 var allCategories = _repo.AllItems.ToList();
                 foreach (var item in allCategories)
                 {
-                    if(item.Name == categoryForCreationDto.Name)
+                    if (item.Name == categoryForCreationDto.Name)
                         return BadRequest("Наименование категории уже существует");
                 }
                 var categoryToCreation = _mapper.Map<Category>(categoryForCreationDto);
-                if(await _repo.AddItemAsync(categoryToCreation))
+                if (await _repo.AddItemAsync(categoryToCreation))
                 {
-                    
-                    PhotoCategory photo = new PhotoCategory()
-                    {
-                        Url = "https://res.cloudinary.com/alcloud/image/upload/v1598367896/%D0%BD%D0%BE%D0%B2%D0%B8%D0%BD%D0%BA%D0%B0_xydkxl_qkwog8.jpg",
-                        CategoryId = categoryToCreation.Id
-                    };
-                    if(await _repoPhoto.AddItemAsync(photo))
-                    {
-                       var catRet = _mapper.Map<CategoryToReturnDto>(categoryToCreation);
-                       return Ok(catRet);
-                        
-                    }
+                    var catRet = _mapper.Map<CategoryToReturnDto>(categoryToCreation);
+                    return Ok(catRet);
                 }
             }
-            return BadRequest();    
+            return BadRequest();
         }
 
         [HttpPut("{id}/edit")]
         public async Task<IActionResult> EditCategory(int id, CategoryForCreationDto categoryForCreation)
         {
             var category = await _repo.GetItemAsync(id);
-            if(category != null) 
+            if (category != null)
             {
                 _mapper.Map(categoryForCreation, category);
-                if(await _repo.SaveChangesAsync()>0)
+                if (await _repo.SaveChangesAsync() > 0)
                 {
                     return Ok();
-                }    
+                }
             }
-           return  BadRequest();
+            return BadRequest();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
-            if(await _repo.DeleteItemAsync(id))
+            var photoFromRepo = await _repoPhoto.AllItems.FirstOrDefaultAsync(p => p.CategoryId == id);
+            if (await _repo.DeleteItemAsync(id))
             {
-                return Ok("Категория удалена");
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+                var result = _cloudinary.Destroy(deleteParams);
+                return Ok();
 
             }
             return BadRequest("Хуйня вышла!");
-            
+
         }
     }
 }

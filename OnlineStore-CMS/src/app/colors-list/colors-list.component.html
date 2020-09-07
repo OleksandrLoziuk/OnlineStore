@@ -1,0 +1,17 @@
+<table class="table mt-4">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Название</th>
+      <th scope="col" class="text-right"><button class="btn btn-success" [routerLink]="['/colors/add']"><i class="fa fa-plus"></i></button></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of colors">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.colorName}}</td>
+      <td class="text-right"><button class="btn btn-danger" (click)="deleteColor(item.id)"><i class="fa fa-trash"></i></button></td>
+    </tr>
+  </tbody>
+</table>

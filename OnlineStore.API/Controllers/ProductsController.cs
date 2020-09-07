@@ -40,23 +40,5 @@ namespace OnlineStore.API.Controllers
 
             return Ok(productToReturn);
         }
-
-        // POST api/products
-        [HttpPost]
-        public void Post([FromBody] string category)
-        {
-        }
-
-        // PUT api/products/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string category)
-        {
-        }
-
-        // DELETE api/products/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
