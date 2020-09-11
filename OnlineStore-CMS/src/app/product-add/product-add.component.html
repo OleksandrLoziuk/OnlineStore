@@ -13,15 +13,15 @@
           <option *ngFor="let item of categories" [ngValue]="item.name">{{item.name}}</option>
         </select>
       </div>
-      <div class="form-group">
-        <div class="row">
-          <div class="col-lg-6 text-left">
+      <div class="form-group text-left">
+        <!-- <div class="row"> -->
+          <!-- <div class="col-lg-6 text-left"> -->
         <label >Выбор цвета:</label>
         <select [(ngModel)]="product.colorName" name="colorName" class="form-control" required>
           <option *ngFor="let item of colors" [ngValue]="item.colorName">{{item.colorName}}</option>
         </select>
           </div>
-          <div class="col-lg-1">
+          <!-- <div class="col-lg-1">
             <div class="btnadd">
             <button class="btn btnadd {{btnClass}}" (click)="addColorForm()"><i class="fa {{iconClass}}"></i></button>
           </div>
@@ -33,7 +33,7 @@
                   <label>Новый цвет:</label>
                 </div>
                 <div class=" col-lg-8 in">
-                  <input type="text" class="form-control" required name="productName"  [(ngModel)]="model.colorName" placeholder="Название:">
+                  <input type="text" class="form-control" required name="colorName"  [(ngModel)]="model.colorName" placeholder="Название:">
                 </div>
                 <div class="col-lg-4 in">
                   <button [disabled]="!registerForm.dirty" (click)="loadColors()" type="submit" class="btn btn-success mr-1">Ok</button>
@@ -42,7 +42,7 @@
               </div>
           </div>
       </div>
-      </div>
+      </div> -->
       <div class="form-group">
         <input type="text" class="form-control" required name="cost"  [(ngModel)]="product.cost" placeholder="Введите цену продукта:">
       </div>

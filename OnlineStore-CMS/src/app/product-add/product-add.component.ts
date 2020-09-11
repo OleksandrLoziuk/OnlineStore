@@ -6,6 +6,7 @@ import { CategoriesService } from '../_services/categories.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Color } from '../_models/Color';
 import { ColorService } from '../_services/color.service';
+import { ProductsService } from '../_services/products.service';
 
 @Component({
   selector: 'app-product-add',
@@ -22,7 +23,7 @@ export class ProductAddComponent implements OnInit {
   iconClass: string =  'fa-plus';
   btnClass: string = 'btn-success';
   constructor(private router: Router, private categoriesService: CategoriesService, private alertify: AlertifyService, private route: ActivatedRoute, 
-    private colorService: ColorService) { }
+    private colorService: ColorService, private productService: ProductsService) { }
 
   ngOnInit() {   
     this.loadCategories();
@@ -42,7 +43,11 @@ export class ProductAddComponent implements OnInit {
   }
 
   addProduct() {
-
+     this.productService.add(this.product).subscribe(() => {
+       this.alertify.success('Продукт добавлен');
+     }, error => {
+       this.alertify.error(error);
+     })
   }
 
   addColor() {

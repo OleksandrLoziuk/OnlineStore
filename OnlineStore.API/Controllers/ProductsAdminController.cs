@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineStore.API.Data.Interfaces;
 using OnlineStore.API.Dtos;
+using OnlineStore.API.Models;
 
 namespace OnlineStore.API.Controllers
 {
@@ -16,8 +18,12 @@ namespace OnlineStore.API.Controllers
     {
         private readonly IProductRepository _repo;
         private readonly IMapper _mapper;
-        public ProductsAdminController(IProductRepository repo, IMapper mapper)
+        private readonly IColorRepository _colRepo;
+        private readonly ICategoryRepository _catRepo;
+        public ProductsAdminController(IProductRepository repo, IMapper mapper, ICategoryRepository catRepo, IColorRepository colRepo)
         {
+            _catRepo = catRepo;
+            _colRepo = colRepo;
             _mapper = mapper;
             _repo = repo;
         }
@@ -44,9 +50,36 @@ namespace OnlineStore.API.Controllers
         }
 
         // POST api/products
-        [HttpPost]
-        public void Post([FromBody] string category)
+        [HttpPost("add")]
+        public async Task<IActionResult> AddProduct(ProductForCreationDto productForCreation)
         {
+            var productToRepo = _mapper.Map<Product>(productForCreation);
+            
+            var categoryFromRepo = await _catRepo.AllItems.Where(c => c.Name == productForCreation.CategoryName ).FirstOrDefaultAsync();
+            if(categoryFromRepo != null)
+            {
+                productToRepo.CategoryId = categoryFromRepo.Id;
+            }
+            else
+            {
+                return BadRequest("Категория не существует");
+            }
+                
+            var colorFromRepo = await _colRepo.AllItems.Where(c => c.ColorName == productForCreation.ColorName).FirstOrDefaultAsync();
+            if(colorFromRepo != null)
+            {
+                productToRepo.ColorId = colorFromRepo.Id;
+                productToRepo.IsAvailable = true;
+            }
+            else
+            {
+               return BadRequest("Цвет не существует"); 
+            }  
+            if(await _repo.AddItemAsync(productToRepo))
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
         // PUT api/products/5

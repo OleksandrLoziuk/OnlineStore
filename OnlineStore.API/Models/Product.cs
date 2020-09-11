@@ -13,7 +13,6 @@ namespace OnlineStore.API.Models
         public int ColorId { get; set; }
         public int MinQuantity { get; set; }
         public string Description { get; set; }
-        public int Balance { get; set; }
         public bool IsAvailable { get; set; }
         public ICollection<Photo> Photos { get; set; }
         public ICollection<StringsOrder> StringsOrder { get; set; }

@@ -9,7 +9,7 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200507163703_Init")]
+    [Migration("20200911174049_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,8 +133,6 @@ namespace OnlineStore.API.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Balance");
 
                     b.Property<int>("CategoryId");
 

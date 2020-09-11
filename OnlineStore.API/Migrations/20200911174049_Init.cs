@@ -124,7 +124,6 @@ namespace OnlineStore.API.Migrations
                     ColorId = table.Column<int>(nullable: false),
                     MinQuantity = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    Balance = table.Column<int>(nullable: false),
                     IsAvailable = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>

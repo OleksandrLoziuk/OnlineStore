@@ -132,8 +132,6 @@ namespace OnlineStore.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Balance");
-
                     b.Property<int>("CategoryId");
 
                     b.Property<int>("ColorId");
