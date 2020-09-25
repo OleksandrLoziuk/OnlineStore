@@ -14,7 +14,7 @@ using OnlineStore.API.Models;
 
 namespace OnlineStore.API.Controllers
 {
-    [Authorize]
+    
     [Route("api/productsadmin/{productId}/[controller]")]
     [ApiController]
     public class PhotoController : ControllerBase
@@ -58,6 +58,7 @@ namespace OnlineStore.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddPhoto(int productId, [FromForm]PhotoForCreationDto photoForCreationDto)
         {
             var productFromRepo = await _repo.GetItemAsync(productId); 
@@ -81,15 +82,11 @@ namespace OnlineStore.API.Controllers
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
-            
-            if(!productFromRepo.Photos.Any(u => u.IsMain))
-                photo.IsMain = true;
-
-            productFromRepo.Photos.Add(photo);
-
-            if(await _repo.SaveChangesAsync()>0)
+            photo.IsMain = true;
+            photo.ProductId = productFromRepo.Id;
+            if(await _repository.AddItemAsync(photo))
             {
-                var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
+                 var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return CreatedAtRoute("GetPhoto", new {id = photo.Id} , photoForReturn);
             }
             return BadRequest("Хуйня вышла");

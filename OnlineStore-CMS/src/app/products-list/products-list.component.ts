@@ -20,8 +20,13 @@ products: Product[];
       this.products = data['products'];
     });
   }
-  deleteProduct(){
-    
+  deleteProduct(prod: Product){
+    this.productService.deleteProduct(prod.id).subscribe(() => {
+      this.products.splice(this.products.findIndex(p => p.id === prod.id), 1);
+      this.alertify.success('Продукт удалён');
+    }, error => {
+      this.alertify.error(error);
+    })
   }
 
 }
