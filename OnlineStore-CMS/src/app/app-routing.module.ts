@@ -18,6 +18,8 @@ import { ProductAddComponent } from './product-add/product-add.component';
 import { ColorsListReolver } from './_resolvers/colors-list.resolver';
 import { ColorsListComponent } from './colors-list/colors-list.component';
 import { ColorsAddComponent } from './colors-add/colors-add.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
 
 
 
@@ -28,7 +30,8 @@ const routes: Routes = [
   {path: 'consumptionadmin', component: ConsumptionListComponent},
   {path: 'categoriesadmin', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
   {path: 'productsadmin', component: ProductsListComponent, resolve: {products: ProductsListResolver}},
-  {path: 'productsadmin/add', component: ProductAddComponent, resolve: {categories: CategoriesListResolver, colors: ColorsListReolver}, },
+  {path: 'productsadmin/add', component: ProductAddComponent, resolve: {categories: CategoriesListResolver, colors: ColorsListReolver} },
+  {path: 'productsadmin/:id/edit', component: ProductEditComponent, resolve: {product: ProductsEditResolver, categories: CategoriesListResolver, colors: ColorsListReolver}},
   {path: 'ordersadmin', component: OrdersListComponent},
   {path: 'categoriesadmin/add', component: CategoryAddComponent},
   {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent, resolve: {category: CategoriesEditResolver}},
