@@ -82,14 +82,23 @@ namespace OnlineStore.API.Controllers
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
-            photo.IsMain = true;
+            var checkIsMainPhoto = await _repository.AllItems.FirstOrDefaultAsync(p => p.IsMain == true);
+            if(checkIsMainPhoto != null)
+            {
+                photo.IsMain = false;
+            }
+            else
+            {
+                photo.IsMain = true;
+            }
+            
             photo.ProductId = productFromRepo.Id;
             if(await _repository.AddItemAsync(photo))
             {
                  var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
                 return CreatedAtRoute("GetPhoto", new {id = photo.Id} , photoForReturn);
             }
-            return BadRequest("Хуйня вышла");
+            return BadRequest();
 
         }
     }

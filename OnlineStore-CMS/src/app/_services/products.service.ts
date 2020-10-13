@@ -32,4 +32,12 @@ deleteProduct(id): Observable<Product> {
   return this.http.delete<Product>(this.baseUrl + 'productsadmin/' + id);
 }
 
+setMainPhoto(prodId: number, id: number) {
+  return this.http.post(this.baseUrl + 'productsadmin/' + prodId + '/edit/' + id + '/setMain', {});
+}
+
+deletePhoto(prodId: number, id: number) {
+  return this.http.delete(this.baseUrl + 'productsadmin/' + prodId + '/edit/' + id);
+}
+
 }

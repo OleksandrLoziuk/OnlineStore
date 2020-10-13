@@ -80,9 +80,11 @@ namespace OnlineStore.API.Controllers
             photoCategoryForCreationDto.PublicId = uploadResult.PublicId;
 
             var photoCategory = _mapper.Map<PhotoCategory>(photoCategoryForCreationDto);
-            var categoryToCheck = await _repository.AllItems.FirstOrDefaultAsync(item => item.CategoryId == categoryId);
-            if(categoryToCheck!=null)
+            var photoToCheck = await _repository.AllItems.FirstOrDefaultAsync(item => item.CategoryId == categoryId);
+            if(photoToCheck!=null)
             {
+                var deleteParams = new DeletionParams(photoToCheck.PublicId);
+                var result = _cloudinary.Destroy(deleteParams);
                 await _repository.ChangeItemAsync(photoCategory);
             }
             else
@@ -100,6 +102,7 @@ namespace OnlineStore.API.Controllers
             return BadRequest("Хуйня вышла!");
 
         }
+        
     
         
     }

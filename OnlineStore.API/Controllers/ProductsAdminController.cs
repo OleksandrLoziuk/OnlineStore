@@ -106,9 +106,23 @@ namespace OnlineStore.API.Controllers
         }
 
         // PUT api/products/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string category)
+        [HttpPut("{id}/edit")]
+        public async Task<IActionResult> EditProduct(int id, ProductForCreationDto productForCreation)
         {
+            var productFromRepo = await _repo.GetItemAsync(id);
+            var catFromRepo = await _catRepo.AllItems.FirstOrDefaultAsync(c => c.Name == productForCreation.CategoryName);
+            var colFromRepo = await _colRepo.AllItems.FirstOrDefaultAsync(c => c.ColorName == productForCreation.ColorName);
+            if(productFromRepo != null)
+            {
+                _mapper.Map(productForCreation, productFromRepo);
+                productFromRepo.CategoryId = catFromRepo.Id;
+                productFromRepo.ColorId = colFromRepo.Id;
+                if(await _repo.SaveChangesAsync()>0)
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
         }
 
         // DELETE api/products/5
@@ -137,5 +151,43 @@ namespace OnlineStore.API.Controllers
                 return BadRequest();    
 
         }
+        [HttpPost("{prodId}/edit/{id}/setMain")]
+        public async Task<IActionResult> SetMainPhoto(int prodId, int id)
+        {
+            var photoFromRepo = await _photoRepo.GetItemAsync(id);
+
+            if(photoFromRepo.IsMain)
+                return BadRequest("Это фото уже главное");
+            
+            var currentMainPhoto = await _photoRepo.AllItems.Where(p => p.ProductId == prodId).Where(p => p.IsMain == true).FirstOrDefaultAsync();
+            currentMainPhoto.IsMain = false;
+
+            photoFromRepo.IsMain = true;
+
+            if( await _photoRepo.SaveChangesAsync()>0)
+                return Ok();
+            
+            return BadRequest();
+        }
+        [HttpDelete("{prodId}/edit/{id}")]
+        public async Task<IActionResult> DeletePhoto(int id)
+        {
+            var photoFromRepo = await _photoRepo.GetItemAsync(id);
+
+            if(photoFromRepo.IsMain)
+                return BadRequest("Невозможно удалить главное фото");
+
+            var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+            var result = _cloudinary.Destroy(deleteParams);
+            if(result.Result == "ok")
+            {
+                if(await _photoRepo.DeleteItemAsync(id))
+                {
+                    return Ok();
+                }
+            }
+            return BadRequest();
+        }
+        
     }
 }

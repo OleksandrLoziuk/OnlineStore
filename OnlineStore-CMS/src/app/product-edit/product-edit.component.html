@@ -43,15 +43,24 @@
   <div class="col-lg-12">
     <h2 class="text-center text-primary text-dark">Изменение фото продукта</h2><hr>
   </div>
-  <div class="col-lg-4" *ngFor="let photo of product.photos">
-    <h5>Главное фото:</h5>
-    <img *ngIf="photo.isMain===true" src="{{photo.url}}" alt="" class="img-thumbnail">
+  <div class="col-lg-4">
+      <h5>Главное фото:</h5>
+      <img src="{{mainPhoto().url}}" alt="" class="img-thumbnail">
+      <div class="text-center">
+      </div>
   </div>
   <div class="col-lg-8">
     <h5>Все фото товара:</h5>
-    <div class="col-sm-2" *ngFor="let photo of product.photos">
+    <div class="row">
+    <div class="col-sm-2 text-center" *ngFor="let photo of photos">
       <img src="{{photo.url}}" alt="" class="img-thumbnail">
+      <button type="button" class="btn btn-sm mr-1" 
+      (click)="setMainPhoto(photo)" 
+      [disabled]="photo.isMain"
+      [ngClass]="photo.isMain ? 'btn-success active' : 'btn-secondary'">Главн.</button>
+      <button type="button" class="btn btn-sm btn-danger" (click)="deletePhoto(photo.id)" [disabled]="photo.isMain"><i class="fa fa-trash-o"></i></button>
     </div>
+  </div>
   </div>
   <div class="col-lg-12 upload ">
     <div class="row mt-3">
