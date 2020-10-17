@@ -9,14 +9,32 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200911174049_Init")]
-    partial class Init
+    [Migration("20201015111805_INIT")]
+    partial class INIT
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+
+            modelBuilder.Entity("OnlineStore.API.Models.Balance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<double>("Sum");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Balances");
+                });
 
             modelBuilder.Entity("OnlineStore.API.Models.Category", b =>
                 {
@@ -157,6 +175,26 @@ namespace OnlineStore.API.Migrations
                     b.ToTable("Product");
                 });
 
+            modelBuilder.Entity("OnlineStore.API.Models.Receipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateAdded");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<double>("Sum");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Receipts");
+                });
+
             modelBuilder.Entity("OnlineStore.API.Models.StringsOrder", b =>
                 {
                     b.Property<int>("Id")
@@ -193,6 +231,14 @@ namespace OnlineStore.API.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("OnlineStore.API.Models.Balance", b =>
+                {
+                    b.HasOne("OnlineStore.API.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("OnlineStore.API.Models.Order", b =>
                 {
                     b.HasOne("OnlineStore.API.Models.Client", "Client")
@@ -227,6 +273,14 @@ namespace OnlineStore.API.Migrations
                     b.HasOne("OnlineStore.API.Models.Color", "Color")
                         .WithMany("Products")
                         .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("OnlineStore.API.Models.Receipt", b =>
+                {
+                    b.HasOne("OnlineStore.API.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

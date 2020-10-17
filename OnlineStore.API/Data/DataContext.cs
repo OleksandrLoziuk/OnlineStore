@@ -12,6 +12,8 @@ namespace OnlineStore.API.Data
         public DbSet<StringsOrder> StringsOrders { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Balance> Balances { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
 
         
     }

@@ -36,6 +36,21 @@ namespace OnlineStore.API.Helpers
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<ColorForCreationDto, Color>();
             CreateMap<ProductForCreationDto, Product>();
+            CreateMap<Balance, BalanceForListDto>()
+            .ForMember(dest => dest.ProductName, opt => {
+                opt.MapFrom(src => src.Product.ProductName);
+            });
+            CreateMap<Receipt, ReceiptForListDto>()
+            .ForMember(dest => dest.ProductName, opt => {
+                opt.MapFrom(src => src.Product.ProductName);
+            })
+            .ForMember(dest => dest.DateAdded, opt => {
+                opt.MapFrom(src => src.DateAdded.ToShortDateString());
+            });
+            CreateMap<ReceiptForCreationDto, Receipt>();
+            CreateMap<BalanceForCreationDto, Balance>();
+            CreateMap<ReceiptForCreationDto, BalanceForCreationDto>();
+            
         }
     }
 }

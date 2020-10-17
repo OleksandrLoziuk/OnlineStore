@@ -27,8 +27,10 @@ namespace OnlineStore.API.Controllers
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
         private readonly IPhotoRepository _photoRepo;
-        public ProductsAdminController(IProductRepository repo, IMapper mapper, ICategoryRepository catRepo, IColorRepository colRepo, IOptions<CloudinarySettings> cloudinaryConfig, IPhotoRepository photoRepo)
+        private readonly IBalanceRepository _balanceRepo;
+        public ProductsAdminController(IProductRepository repo, IMapper mapper, ICategoryRepository catRepo, IColorRepository colRepo, IOptions<CloudinarySettings> cloudinaryConfig, IPhotoRepository photoRepo, IBalanceRepository balanceRepo)
         {
+            _balanceRepo = balanceRepo;
             _photoRepo = photoRepo;
             _catRepo = catRepo;
             _colRepo = colRepo;
@@ -90,16 +92,33 @@ namespace OnlineStore.API.Controllers
             if (colorFromRepo != null)
             {
                 productToRepo.ColorId = colorFromRepo.Id;
-                productToRepo.IsAvailable = true;
             }
             else
             {
                 return BadRequest("Цвет не существует");
             }
-
+            productToRepo.IsAvailable = false;
             if (await _repo.AddItemAsync(productToRepo))
             {
                 var prodToRet = _mapper.Map<ProductForListDto>(productToRepo);
+
+                var balanceToCheck = await _balanceRepo.AllItems.FirstOrDefaultAsync(p=> p.ProductId == prodToRet.Id);
+                if(balanceToCheck == null)
+                {
+                    BalanceForCreationDto balanceForCreation = new BalanceForCreationDto()
+                    {
+                        ProductId = prodToRet.Id,
+                        Quantity = 0,
+                        Sum = 0
+                    };
+                    
+                   if(await _balanceRepo.AddItemAsync(_mapper.Map(balanceForCreation, balanceToCheck)))
+                   {
+                       return Ok();
+                   }
+                   return BadRequest();
+                }
+
                 return Ok(prodToRet);
             }
             return BadRequest();
@@ -112,13 +131,25 @@ namespace OnlineStore.API.Controllers
             var productFromRepo = await _repo.GetItemAsync(id);
             var catFromRepo = await _catRepo.AllItems.FirstOrDefaultAsync(c => c.Name == productForCreation.CategoryName);
             var colFromRepo = await _colRepo.AllItems.FirstOrDefaultAsync(c => c.ColorName == productForCreation.ColorName);
-            if(productFromRepo != null)
+            if (productFromRepo != null)
             {
                 _mapper.Map(productForCreation, productFromRepo);
                 productFromRepo.CategoryId = catFromRepo.Id;
                 productFromRepo.ColorId = colFromRepo.Id;
-                if(await _repo.SaveChangesAsync()>0)
+                if (await _repo.SaveChangesAsync() > 0)
                 {
+                    if(productForCreation.Cost != productFromRepo.Cost)
+                    {
+                        var balanceFromRepo = await _balanceRepo.AllItems.FirstOrDefaultAsync(p => p.ProductId == productFromRepo.Id);
+                        if(balanceFromRepo!=null)
+                        {
+                            balanceFromRepo.Sum = balanceFromRepo.Quantity*productForCreation.Cost;
+                            if(await _balanceRepo.SaveChangesAsync()>0)
+                            {
+                                return Ok();
+                            }
+                        }
+                    }
                     return Ok();
                 }
             }
@@ -129,26 +160,26 @@ namespace OnlineStore.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-                var photosFromRepo = await _photoRepo.AllItems.Where(p => p.ProductId == id).ToListAsync();
-                if(photosFromRepo.Count != 0)
+            var photosFromRepo = await _photoRepo.AllItems.Where(p => p.ProductId == id).ToListAsync();
+            if (photosFromRepo.Count != 0)
+            {
+                foreach (var item in photosFromRepo)
                 {
-                    foreach (var item in photosFromRepo)
-                    {
-                        var deleteParams = new DeletionParams(item.PublicId);
-                        _cloudinary.Destroy(deleteParams);
-                        await _photoRepo.DeleteItemAsync(item.Id);
-                    }
-                    photosFromRepo = await _photoRepo.AllItems.Where(p => p.ProductId == id).ToListAsync();
-                    if(photosFromRepo.Count == 0)
-                    {
-                        if(await _repo.DeleteItemAsync(id))
-                            return Ok();
-                    }
+                    var deleteParams = new DeletionParams(item.PublicId);
+                    _cloudinary.Destroy(deleteParams);
+                    await _photoRepo.DeleteItemAsync(item.Id);
                 }
+                photosFromRepo = await _photoRepo.AllItems.Where(p => p.ProductId == id).ToListAsync();
+                if (photosFromRepo.Count == 0)
+                {
+                    if (await _repo.DeleteItemAsync(id))
+                        return Ok();
+                }
+            }
 
-                if(await _repo.DeleteItemAsync(id))
-                    return Ok();
-                return BadRequest();    
+            if (await _repo.DeleteItemAsync(id))
+                return Ok();
+            return BadRequest();
 
         }
         [HttpPost("{prodId}/edit/{id}/setMain")]
@@ -156,17 +187,17 @@ namespace OnlineStore.API.Controllers
         {
             var photoFromRepo = await _photoRepo.GetItemAsync(id);
 
-            if(photoFromRepo.IsMain)
+            if (photoFromRepo.IsMain)
                 return BadRequest("Это фото уже главное");
-            
+
             var currentMainPhoto = await _photoRepo.AllItems.Where(p => p.ProductId == prodId).Where(p => p.IsMain == true).FirstOrDefaultAsync();
             currentMainPhoto.IsMain = false;
 
             photoFromRepo.IsMain = true;
 
-            if( await _photoRepo.SaveChangesAsync()>0)
+            if (await _photoRepo.SaveChangesAsync() > 0)
                 return Ok();
-            
+
             return BadRequest();
         }
         [HttpDelete("{prodId}/edit/{id}")]
@@ -174,20 +205,20 @@ namespace OnlineStore.API.Controllers
         {
             var photoFromRepo = await _photoRepo.GetItemAsync(id);
 
-            if(photoFromRepo.IsMain)
+            if (photoFromRepo.IsMain)
                 return BadRequest("Невозможно удалить главное фото");
 
             var deleteParams = new DeletionParams(photoFromRepo.PublicId);
             var result = _cloudinary.Destroy(deleteParams);
-            if(result.Result == "ok")
+            if (result.Result == "ok")
             {
-                if(await _photoRepo.DeleteItemAsync(id))
+                if (await _photoRepo.DeleteItemAsync(id))
                 {
                     return Ok();
                 }
             }
             return BadRequest();
         }
-        
+
     }
 }

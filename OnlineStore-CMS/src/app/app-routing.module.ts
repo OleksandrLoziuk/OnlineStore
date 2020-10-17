@@ -25,7 +25,7 @@ import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
 
 const routes: Routes = [
   {path: 'welcomepage', component: WelcomepageComponent},
-  {path: 'balanceadmin', component: BalanceComponent},
+  {path: 'balance', component: BalanceComponent},
   {path: 'receiptadmin', component: ReceiptListComponent},
   {path: 'consumptionadmin', component: ConsumptionListComponent},
   {path: 'categoriesadmin', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
