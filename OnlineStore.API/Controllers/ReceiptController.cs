@@ -63,5 +63,55 @@ namespace OnlineStore.API.Controllers
             }
             return BadRequest();
         }
+
+        [HttpPut("{id}/edit")]
+        public async Task<IActionResult> EditReceipt(int id, ReceiptForCreationDto receiptForCreation)
+        {
+            var itemFromReceiptRepo = await _repo.GetItemAsync(id);
+            var balanceToChange = await _balanceRepo.AllItems.FirstOrDefaultAsync(b => b.ProductId == itemFromReceiptRepo.ProductId);
+
+            if(balanceToChange != null)
+            {
+                balanceToChange.Quantity-=itemFromReceiptRepo.Quantity;
+                balanceToChange.Sum-=itemFromReceiptRepo.Sum;
+
+                balanceToChange.Quantity+=receiptForCreation.Quantity;
+                balanceToChange.Sum+=receiptForCreation.Sum;
+
+                if(await _balanceRepo.SaveChangesAsync()>0)
+                {
+                    itemFromReceiptRepo.Quantity = receiptForCreation.Quantity;
+                    itemFromReceiptRepo.Sum = receiptForCreation.Sum;
+
+                    if(await _repo.SaveChangesAsync()>0)
+                    {
+                        return Ok();
+                    }
+                }
+            }
+            return BadRequest();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReceipt(int id)
+        {
+            var itemReceiptFromRepo = await _repo.GetItemAsync(id);
+            var balanceToChange = await _balanceRepo.AllItems.FirstOrDefaultAsync(b => b.ProductId == itemReceiptFromRepo.ProductId);
+
+            if(balanceToChange!=null)
+            {
+                balanceToChange.Quantity-=itemReceiptFromRepo.Quantity;
+                balanceToChange.Sum-=itemReceiptFromRepo.Sum;
+
+                if(await _balanceRepo.SaveChangesAsync()>0)
+                {
+                    if(await _repo.DeleteItemAsync(id))
+                    {
+                        return Ok();
+                    }
+                }
+            }
+            return BadRequest();
+        }
     }
 }
