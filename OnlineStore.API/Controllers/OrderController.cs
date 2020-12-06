@@ -57,7 +57,7 @@ namespace OnlineStore.API.Controllers
                         ClientId = clientForOrder.Id,
                         SumOrder = sum,
                         DateTimeOrder = DateTime.Now,
-                        Status = "Новый"
+                        Status = 1
                     };
                     await _ordRepo.AddItemAsync(orderToDb);
                     foreach (var item in strOrds)

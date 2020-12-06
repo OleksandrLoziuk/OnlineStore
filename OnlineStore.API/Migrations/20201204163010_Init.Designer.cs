@@ -9,8 +9,8 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201015111805_INIT")]
-    partial class INIT
+    [Migration("20201204163010_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -97,7 +97,7 @@ namespace OnlineStore.API.Migrations
 
                     b.Property<DateTime>("DateTimeOrder");
 
-                    b.Property<string>("Status");
+                    b.Property<int>("Status");
 
                     b.Property<double>("SumOrder");
 
@@ -193,6 +193,40 @@ namespace OnlineStore.API.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Receipts");
+                });
+
+            modelBuilder.Entity("OnlineStore.API.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Новый"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Принят"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Выполнен"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Отменён"
+                        });
                 });
 
             modelBuilder.Entity("OnlineStore.API.Models.StringsOrder", b =>

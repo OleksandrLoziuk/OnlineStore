@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OnlineStore.API.Migrations
 {
-    public partial class INIT : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,6 +55,19 @@ namespace OnlineStore.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Status",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Status", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -99,7 +112,7 @@ namespace OnlineStore.API.Migrations
                     ClientId = table.Column<int>(nullable: false),
                     SumOrder = table.Column<double>(nullable: false),
                     DateTimeOrder = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<string>(nullable: true)
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -230,6 +243,26 @@ namespace OnlineStore.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Status",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Новый" });
+
+            migrationBuilder.InsertData(
+                table: "Status",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "Принят" });
+
+            migrationBuilder.InsertData(
+                table: "Status",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "Выполнен" });
+
+            migrationBuilder.InsertData(
+                table: "Status",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "Отменён" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Balances_ProductId",
                 table: "Balances",
@@ -288,6 +321,9 @@ namespace OnlineStore.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Receipts");
+
+            migrationBuilder.DropTable(
+                name: "Status");
 
             migrationBuilder.DropTable(
                 name: "StringsOrders");

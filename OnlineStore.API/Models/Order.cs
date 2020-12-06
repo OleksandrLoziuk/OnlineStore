@@ -9,7 +9,7 @@ namespace OnlineStore.API.Models
         public int ClientId { get; set; }
         public double SumOrder { get; set; }
         public DateTime DateTimeOrder { get; set; }
-        public string Status { get; set; }         
+        public int Status { get; set; }         
 
     }
 }
