@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-2"></div>
+   <div class="col-lg-8 text-center">
+     <form #registerForm="ngForm" (ngSubmit)="addReceipt()">
+
+       <h2 class="text-center text-primary text-dark">Добавление на приход</h2><hr>
+      
+       <div class="form-group text-left">
+        <label>Выбор продукта:</label>
+        <select [(ngModel)]="model.productName" name="productName" class="form-control" required>
+          <option *ngFor="let item of products" [ngValue]="item.productName">{{item.productName}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" required name="quantity"  [(ngModel)]="model.quantity" placeholder="Введите количество:">
+      </div>
+
+         <button [disabled]="!registerForm.dirty" type="submit" class="btn btn-success mr-1">Добавить</button>
+         <button class="btn btn-secondary ml-1" type="button" (click)="back()">Назад</button>
+     </form>
+   </div>
+   <div class="col-lg-2"></div>
+ </div>

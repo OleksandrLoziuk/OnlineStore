@@ -9,6 +9,7 @@ import { ColorService } from '../_services/color.service';
 import { ProductsService } from '../_services/products.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
+import { Photo } from '../_models/Photo';
 
 @Component({
   selector: 'app-product-add',
@@ -16,9 +17,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./product-add.component.scss']
 })
 export class ProductAddComponent implements OnInit {
-  req: Product = null;
+  req: Product;
   product: any = {};
   categories: Category [];
+  photos: Photo[];
   colors: Color[];
   model: any = {};
   uploader: FileUploader;

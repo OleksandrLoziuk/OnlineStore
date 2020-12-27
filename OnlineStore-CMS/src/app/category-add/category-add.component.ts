@@ -4,8 +4,8 @@ import { CategoriesService } from '../_services/categories.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
-import { Photocategory } from '../_models/Photocategory';
 import { Category } from '../_models/Category';
+
 
 
 @Component({
@@ -24,7 +24,6 @@ export class CategoryAddComponent implements OnInit {
   constructor(private router: Router, private categoriesService: CategoriesService, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    
   }
   initializeUploader() {
     this.uploader = new FileUploader({

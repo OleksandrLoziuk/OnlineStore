@@ -39,6 +39,10 @@ import { ColorsListComponent } from './colors-list/colors-list.component';
 import { ColorsAddComponent } from './colors-add/colors-add.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
+import { ReceiptAddComponent } from './receipt-add/receipt-add.component';
+import { ReceiptListResolver } from './_resolvers/receipt-list.resolver';
+
+
 
 
 
@@ -49,7 +53,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-   declarations: [						
+   declarations: [										
       AppComponent,
       NavComponent,
       AuthComponent,
@@ -69,7 +73,8 @@ export function tokenGetter() {
       ProductAddComponent,
       ColorsListComponent,
       ColorsAddComponent,
-      ProductEditComponent
+      ProductEditComponent,
+      ReceiptAddComponent,
    ],
    imports: [
       BrowserModule,
@@ -97,7 +102,8 @@ export function tokenGetter() {
       ProductsListResolver,
       ColorService,
       ColorsListReolver,
-      ProductsEditResolver
+      ProductsEditResolver,
+      ReceiptListResolver
    ],
    bootstrap: [
       AppComponent

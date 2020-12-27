@@ -95,12 +95,19 @@ namespace OnlineStore.API.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var photoFromRepo = await _repoPhoto.AllItems.FirstOrDefaultAsync(p => p.CategoryId == id);
-            if (await _repo.DeleteItemAsync(id))
+            if(photoFromRepo != null) 
             {
+                if (await _repo.DeleteItemAsync(id))
+                {
                 var deleteParams = new DeletionParams(photoFromRepo.PublicId);
                 var result = _cloudinary.Destroy(deleteParams);
                 return Ok();
 
+                }
+            }
+            if (await _repo.DeleteItemAsync(id))
+            {
+                return Ok();
             }
             return BadRequest("Хуйня вышла!");
 

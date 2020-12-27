@@ -44,11 +44,16 @@ namespace OnlineStore.API.Helpers
             .ForMember(dest => dest.ProductName, opt => {
                 opt.MapFrom(src => src.Product.ProductName);
             })
+            .ForMember(dest => dest.ProductCost, opt => {
+                opt.MapFrom(src => src.Product.Cost);
+            })
+            .ForMember(dest => dest.ProductCost, opt => {
+                opt.MapFrom(src => src.Product.Cost);
+            })
             .ForMember(dest => dest.DateAdded, opt => {
                 opt.MapFrom(src => src.DateAdded.ToShortDateString());
             });
             CreateMap<ReceiptForCreationDto, Receipt>();
-            CreateMap<BalanceForCreationDto, Balance>();
             CreateMap<ReceiptForCreationDto, BalanceForCreationDto>();
             
         }

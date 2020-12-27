@@ -20,13 +20,16 @@ import { ColorsListComponent } from './colors-list/colors-list.component';
 import { ColorsAddComponent } from './colors-add/colors-add.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
+import { ReceiptAddComponent } from './receipt-add/receipt-add.component';
+import { ReceiptListResolver } from './_resolvers/receipt-list.resolver';
 
 
 
 const routes: Routes = [
   {path: 'welcomepage', component: WelcomepageComponent},
   {path: 'balance', component: BalanceComponent},
-  {path: 'receiptadmin', component: ReceiptListComponent},
+  {path: 'receiptadmin', component: ReceiptListComponent, resolve:{receipts: ReceiptListResolver}},
+  {path: 'receiptadmin/add', component: ReceiptAddComponent, resolve: {categories: CategoriesListResolver, products: ProductsListResolver}},
   {path: 'consumptionadmin', component: ConsumptionListComponent},
   {path: 'categoriesadmin', component: CategoriesListComponent, resolve: {categories: CategoriesListResolver}},
   {path: 'productsadmin', component: ProductsListComponent, resolve: {products: ProductsListResolver}},
