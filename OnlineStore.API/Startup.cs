@@ -54,6 +54,7 @@ namespace OnlineStore.API
             services.AddTransient<IColorRepository, ColorRepository>();
             services.AddTransient<IBalanceRepository, BalanceRepository>();
             services.AddTransient<IReceiptRepository, ReceiptRepository>();
+            services.AddTransient<IStatusRepository, StatusRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters

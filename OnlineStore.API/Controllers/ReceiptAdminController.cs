@@ -57,7 +57,10 @@ namespace OnlineStore.API.Controllers
         {
             var itemReceiptFromRepo = await _repo.GetItemAsync(id);
             if (await _repo.DeleteItemAsync(id))
+            {
                 return Ok();
+            }
+                
             return BadRequest();
         }
     }

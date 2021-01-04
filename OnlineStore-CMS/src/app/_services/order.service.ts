@@ -11,5 +11,13 @@ export class OrderService {
 baseUrl = environment.apiUrl;
 
 constructor(private http: HttpClient) { }
+  
+  getOrders(): Observable<Order[]> {
+  return this.http.get<Order[]>(this.baseUrl + 'orderadmin');
+}
+
+deleteOrder(id): Observable<Order> {
+  return this.http.delete<Order>(this.baseUrl + 'orderadmin/' + id);
+}
 
 }

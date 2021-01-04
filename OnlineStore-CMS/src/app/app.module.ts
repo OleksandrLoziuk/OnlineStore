@@ -41,6 +41,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
 import { ReceiptAddComponent } from './receipt-add/receipt-add.component';
 import { ReceiptListResolver } from './_resolvers/receipt-list.resolver';
+import { OrdersListResolver } from './_resolvers/orders-list.resolver';
 
 
 
@@ -103,7 +104,8 @@ export function tokenGetter() {
       ColorService,
       ColorsListReolver,
       ProductsEditResolver,
-      ReceiptListResolver
+      ReceiptListResolver,
+      OrdersListResolver
    ],
    bootstrap: [
       AppComponent

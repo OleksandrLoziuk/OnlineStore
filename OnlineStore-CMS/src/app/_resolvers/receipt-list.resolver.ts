@@ -16,7 +16,7 @@ export class ReceiptListResolver implements Resolve<Receipt[]> {
         return this.receiptService.getReceipts().pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/productadmin']);
+                this.router.navigate(['/receiptadmin']);
                 return of(null);
             })
         );

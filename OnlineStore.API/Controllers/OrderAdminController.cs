@@ -25,9 +25,20 @@ namespace OnlineStore.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetOrders()
         {
-            var orderFromRepo = await _orderRepo.AllItems.ToListAsync();
+            var orderFromRepo = await _orderRepo.AllItems.Include(s => s.Status).Include(c => c.Client).ToListAsync();
             var orderToReturn = _mapper.Map<IEnumerable<OrderToListDto>>(orderFromRepo);
             return Ok(orderToReturn);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            if(await _orderRepo.DeleteItemAsync(id))
+            {
+                return Ok();
+            }
+            return BadRequest();
+            
         }
     }
 }
