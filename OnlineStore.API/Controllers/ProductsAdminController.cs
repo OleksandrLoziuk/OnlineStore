@@ -102,25 +102,7 @@ namespace OnlineStore.API.Controllers
             productToRepo.IsAvailable = false;
             if (await _repo.AddItemAsync(productToRepo))
             {
-                var prodToRet = _mapper.Map<ProductForListDto>(productToRepo);
-
-                var balanceToCheck = await _balanceRepo.AllItems.FirstOrDefaultAsync(p => p.ProductId == prodToRet.Id);
-                if (balanceToCheck == null)
-                {
-                    BalanceForCreationDto balanceForCreation = new BalanceForCreationDto()
-                    {
-                        ProductId = prodToRet.Id,
-                        Quantity = 0,
-                        Sum = 0
-                    };
-
-                    if (await _balanceRepo.AddItemAsync(_mapper.Map(balanceForCreation, balanceToCheck)))
-                    {
-                        return Ok(prodToRet);
-                    }
-                    return BadRequest();
-                }
-
+                var prodToRet = _mapper.Map<ProductForDetailedDto>(productToRepo);
                 return Ok(prodToRet);
             }
             return BadRequest();
@@ -140,29 +122,14 @@ namespace OnlineStore.API.Controllers
                 productFromRepo.ColorId = colFromRepo.Id;
                 if (await _repo.SaveChangesAsync() > 0)
                 {
-                    
-                        var balanceFromRepo = await _balanceRepo.AllItems.FirstOrDefaultAsync(p => p.ProductId == productFromRepo.Id);
-                        if (balanceFromRepo != null)
-                        {
-                            balanceFromRepo.Sum = balanceFromRepo.Quantity * productForCreation.Cost;
-                            if (await _balanceRepo.SaveChangesAsync() > 0)
-                            {
-                                var receiptFromRepo = await _receiptRepo.AllItems.FirstOrDefaultAsync(p => p.Product.ProductName == productForCreation.ProductName);
-                                receiptFromRepo.Sum = receiptFromRepo.Quantity * receiptFromRepo.Product.Cost;
-                                if(await _receiptRepo.SaveChangesAsync()>0)
-                                {
-                                    return Ok();
-                                }
-                            }
-                        
-                        
-
-                        }
-                    return Ok();
+                    return Ok();           
                 }
+                  
             }
             return BadRequest();
         }
+            
+  
 
         // DELETE api/products/5
         [HttpDelete("{id}")]

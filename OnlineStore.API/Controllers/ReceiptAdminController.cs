@@ -17,14 +17,12 @@ namespace OnlineStore.API.Controllers
     public class ReceiptAdminController : ControllerBase
     {
         private readonly IReceiptRepository _repo;
-        private readonly IBalanceRepository _balanceRepo;
         private readonly IMapper _mapper;
         private readonly IProductRepository _productRepo;
-        public ReceiptAdminController(IReceiptRepository repo, IBalanceRepository balanceRepo, IMapper mapper, IProductRepository productRepo)
+        public ReceiptAdminController(IReceiptRepository repo, IMapper mapper, IProductRepository productRepo)
         {
             _productRepo = productRepo;
             _mapper = mapper;
-            _balanceRepo = balanceRepo;
             _repo = repo;
         }
 
@@ -46,58 +44,10 @@ namespace OnlineStore.API.Controllers
                 itemToRepo.ProductId = productFromRepo.Id;
                 itemToRepo.Sum = itemToRepo.Quantity*productFromRepo.Cost;
                 productFromRepo.IsAvailable = true;
-                await _balanceRepo.SaveChangesAsync();
             }
             if (await _repo.AddItemAsync(itemToRepo))
             {
-                var balanceToChange = await _balanceRepo.AllItems.FirstOrDefaultAsync(p => p.Product.ProductName == receiptForCreation.ProductName);
-                if (balanceToChange != null)
-                {
-                    balanceToChange.Quantity += receiptForCreation.Quantity;
-                    balanceToChange.Sum += receiptForCreation.Sum;
-                    if (await _balanceRepo.SaveChangesAsync() > 0)
-                    {
-                        return Ok();
-                    }
-
-                }
-                else
-                {
-                    BalanceForCreationDto balanceForCreation = _mapper.Map<BalanceForCreationDto>(receiptForCreation);
-                    var itemToBalanceRepo = _mapper.Map<Balance>(balanceForCreation);
-                    if (await _balanceRepo.AddItemAsync(itemToBalanceRepo))
-                    {
-                        return Ok();
-                    }
-                }
-                return BadRequest("Something wrong!");
-            }
-            return BadRequest();
-        }
-        [HttpPut("{id}/edit")]
-        public async Task<IActionResult> EditReceipt(int id, ReceiptForCreationDto receiptForCreation)
-        {
-            var itemFromReceiptRepo = await _repo.GetItemAsync(id);
-            var balanceToChange = await _balanceRepo.AllItems.FirstOrDefaultAsync(b => b.ProductId == itemFromReceiptRepo.ProductId);
-
-            if (balanceToChange != null)
-            {
-                balanceToChange.Quantity -= itemFromReceiptRepo.Quantity;
-                balanceToChange.Sum -= itemFromReceiptRepo.Sum;
-
-                balanceToChange.Quantity += receiptForCreation.Quantity;
-                balanceToChange.Sum += receiptForCreation.Sum;
-
-                if (await _balanceRepo.SaveChangesAsync() > 0)
-                {
-                    itemFromReceiptRepo.Quantity = receiptForCreation.Quantity;
-                    itemFromReceiptRepo.Sum = receiptForCreation.Sum;
-
-                    if (await _repo.SaveChangesAsync() > 0)
-                    {
-                        return Ok();
-                    }
-                }
+                return Ok();
             }
             return BadRequest();
         }
@@ -106,21 +56,8 @@ namespace OnlineStore.API.Controllers
         public async Task<IActionResult> DeleteReceipt(int id)
         {
             var itemReceiptFromRepo = await _repo.GetItemAsync(id);
-            var balanceToChange = await _balanceRepo.AllItems.FirstOrDefaultAsync(b => b.ProductId == itemReceiptFromRepo.ProductId);
-
-            if (balanceToChange != null)
-            {
-                balanceToChange.Quantity -= itemReceiptFromRepo.Quantity;
-                balanceToChange.Sum -= itemReceiptFromRepo.Sum;
-
-                if (await _balanceRepo.SaveChangesAsync() > 0)
-                {
-                    if (await _repo.DeleteItemAsync(id))
-                    {
-                        return Ok();
-                    }
-                }
-            }
+            if (await _repo.DeleteItemAsync(id))
+                return Ok();
             return BadRequest();
         }
     }

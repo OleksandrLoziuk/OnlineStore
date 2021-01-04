@@ -55,6 +55,16 @@ namespace OnlineStore.API.Helpers
             });
             CreateMap<ReceiptForCreationDto, Receipt>();
             CreateMap<ReceiptForCreationDto, BalanceForCreationDto>();
+            CreateMap<Order, OrderToListDto>()
+            .ForMember(dest => dest.ClientPhone, opt => {
+                opt.MapFrom(src => src.Client.PhoneNumber);
+            })
+            .ForMember(dest => dest.Status, opt => {
+                opt.MapFrom(src => src.Status.Name);
+            })
+            .ForMember(dest => dest.DateTimeOrder, opt => {
+                opt.MapFrom(src => src.DateTimeOrder.ToLongDateString());
+            });
             
         }
     }

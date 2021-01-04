@@ -27,7 +27,7 @@ namespace OnlineStore.API.Controllers
             _repo = repo;
         }
         // GET api/categories
-        [HttpGet]
+        [HttpGet (Name = "GetCategories")]
         public async Task<IActionResult> GetCategories()
         {
             var categories = await _repo.AllItems.Include(item => item.photoCategory).ToListAsync();
@@ -36,7 +36,7 @@ namespace OnlineStore.API.Controllers
         }
 
         // GET api/categories/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCategory")]
         public async Task<IActionResult> GetCategory(int id)
         {
             var products = await _prRep.AllItems.Include(item => item.Photos).Where(p => p.CategoryId == id).ToListAsync();
@@ -46,8 +46,7 @@ namespace OnlineStore.API.Controllers
             return Ok(productsToReturn);
         }
         
-        // GET api/categories/5/2
-        [HttpGet("{idcat}/{idprod}")]
+        [HttpGet("{idcat}/{idprod}", Name = "GetProduct")]
         public async Task<IActionResult> GetProduct(int idcat, int idprod)
         {
             var product = await _prRep.AllItems.Include(item => item.Color).Include(item => item.Category).Include(item => item.Photos).FirstOrDefaultAsync(x => x.Id == idprod);
@@ -55,17 +54,6 @@ namespace OnlineStore.API.Controllers
             var productToReturn = _mapper.Map<ProductForDetailedDto>(product);
 
             return Ok(productToReturn);
-        }
-        // PUT api/categories/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string category)
-        {
-        }
-
-        // DELETE api/categories/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

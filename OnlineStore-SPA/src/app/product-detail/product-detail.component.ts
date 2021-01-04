@@ -13,7 +13,7 @@ import { StringsOrderService } from '../_services/stringsOrder.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  @Input() product: Product;
+  product: Product;
   icon: string;
   isAvText: string;
   textColor: string;
@@ -37,8 +37,7 @@ export class ProductDetailComponent implements OnInit {
       }
     ];
     this.galleryImages = this.getImages();
-  }
-  
+  } 
   getImages(){
     const imageUrls = [];
     for(let i = 0; i < this.product.photos.length; i++) {

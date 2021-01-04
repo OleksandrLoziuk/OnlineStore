@@ -1,22 +1,33 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineStore.API.Data.Interfaces;
+using OnlineStore.API.Dtos;
 
 namespace OnlineStore.API.Controllers
 {
     [Authorize]
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class OrderAdminController : ControllerBase
     {
-        private readonly IBalanceRepository _balanceRepo;
-        private readonly IStringsOrderRepository _strOrdRepo;
-        private readonly IOrderRepository _orederRepo;
-        public OrderAdminController(IBalanceRepository balanceRepo, IStringsOrderRepository strOrdRepo, IOrderRepository orederRepo)
+        private readonly IOrderRepository _orderRepo;
+
+        private readonly IMapper _mapper;
+        public OrderAdminController(IOrderRepository orderRepo, IMapper mapper)
         {
-            _orederRepo = orederRepo;
-            _strOrdRepo = strOrdRepo;
-            _balanceRepo = balanceRepo;
+            _orderRepo = orderRepo;
+            _mapper = mapper;
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetOrders()
+        {
+            var orderFromRepo = await _orderRepo.AllItems.ToListAsync();
+            var orderToReturn = _mapper.Map<IEnumerable<OrderToListDto>>(orderFromRepo);
+            return Ok(orderToReturn);
         }
     }
 }

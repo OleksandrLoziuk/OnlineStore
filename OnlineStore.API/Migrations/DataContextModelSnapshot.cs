@@ -95,13 +95,15 @@ namespace OnlineStore.API.Migrations
 
                     b.Property<DateTime>("DateTimeOrder");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("StatusId");
 
                     b.Property<double>("SumOrder");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Orders");
                 });
@@ -276,6 +278,11 @@ namespace OnlineStore.API.Migrations
                     b.HasOne("OnlineStore.API.Models.Client", "Client")
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OnlineStore.API.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

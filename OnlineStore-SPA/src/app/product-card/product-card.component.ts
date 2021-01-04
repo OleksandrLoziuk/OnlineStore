@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../_models/Product';
 import { StringsOrderService } from '../_services/stringsOrder.service';
 
@@ -12,7 +13,8 @@ export class ProductCardComponent implements OnInit {
   icon: string;
   isAvText: string;
   textColor: string;
-  constructor(private stringsOrederService: StringsOrderService) { }
+  categoryId: number
+  constructor(private stringsOrederService: StringsOrderService, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -29,6 +31,7 @@ export class ProductCardComponent implements OnInit {
        return true;
     }
  }
+
  isPay() {
   if (this.product.isAvailable) {
     return false;

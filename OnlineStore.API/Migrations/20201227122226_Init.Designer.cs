@@ -9,7 +9,7 @@ using OnlineStore.API.Data;
 namespace OnlineStore.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201204163010_Init")]
+    [Migration("20201227122226_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,13 +97,15 @@ namespace OnlineStore.API.Migrations
 
                     b.Property<DateTime>("DateTimeOrder");
 
-                    b.Property<int>("Status");
+                    b.Property<int>("StatusId");
 
                     b.Property<double>("SumOrder");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Orders");
                 });
@@ -278,6 +280,11 @@ namespace OnlineStore.API.Migrations
                     b.HasOne("OnlineStore.API.Models.Client", "Client")
                         .WithMany("Orders")
                         .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("OnlineStore.API.Models.Status", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

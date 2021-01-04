@@ -82,7 +82,7 @@ namespace OnlineStore.API.Controllers
             photoForCreationDto.PublicId = uploadResult.PublicId;
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
-            var checkIsMainPhoto = await _repository.AllItems.FirstOrDefaultAsync(p => p.IsMain == true);
+            var checkIsMainPhoto = await _repository.AllItems.FirstOrDefaultAsync(p => p.IsMain == true && p.ProductId == productFromRepo.Id);
             if(checkIsMainPhoto != null)
             {
                 photo.IsMain = false;

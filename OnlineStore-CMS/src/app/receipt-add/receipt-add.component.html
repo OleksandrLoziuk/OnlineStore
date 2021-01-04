@@ -5,6 +5,13 @@
      <form #registerForm="ngForm" (ngSubmit)="addReceipt()">
 
        <h2 class="text-center text-primary text-dark">Добавление на приход</h2><hr>
+       
+       <!-- <div class="form-group text-left">
+        <label>Выбор категории:</label>
+        <select [(ngModel)]="model.categoryName" name="categoryName" class="form-control" required>
+          <option *ngFor="let item of categories" [ngValue]="item.name">{{item.name}}</option>
+        </select>
+      </div> -->
       
        <div class="form-group text-left">
         <label>Выбор продукта:</label>

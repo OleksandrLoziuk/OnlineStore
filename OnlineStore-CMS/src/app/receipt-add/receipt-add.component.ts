@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EventEmitter } from 'events';
 import { Category } from '../_models/Category';
 import { Product } from '../_models/Product';
 import { Receipt } from '../_models/Receipt';
@@ -16,6 +17,7 @@ export class ReceiptAddComponent implements OnInit {
   products: Product[];
   model: any = {};
   req: any = {};
+  prodToRet: Product[];
   constructor(private alertify: AlertifyService, private route: ActivatedRoute,private router: Router, private receiptService: ReceiptService) { }
 
   ngOnInit() {
@@ -37,6 +39,8 @@ export class ReceiptAddComponent implements OnInit {
   back() {
     this.router.navigate(['/receiptadmin']);
   }
+
+
 
   addReceipt() {
      this.receiptService.add(this.model).subscribe((data: Receipt) => {
