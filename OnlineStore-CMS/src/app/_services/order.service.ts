@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Order } from 'src/app/_models/Order';
+import { OrderDetail } from '../_models/OrderDetail';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +17,11 @@ constructor(private http: HttpClient) { }
   return this.http.get<Order[]>(this.baseUrl + 'orderadmin');
 }
 
-deleteOrder(id): Observable<Order> {
-  return this.http.delete<Order>(this.baseUrl + 'orderadmin/' + id);
+getOrder(id): Observable<Order> {
+  return this.http.get<Order>(this.baseUrl + 'orderadmin/' + id);
 }
 
+editOrder(id: number, model: OrderDetail)  {
+  return this.http.put(this.baseUrl + 'orderadmin/' + id, model);
+}
 }

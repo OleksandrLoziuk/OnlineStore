@@ -18,18 +18,5 @@ export class OrdersListComponent implements OnInit {
       this.orders = data['orders'];
     });
   }
-  loadOrders() {
-    this.orderService.getOrders().subscribe((data: Order[])=> {
-      this.orders= data;
-    })
-  }
   
-  deleteOrder(id: number) {
-    this.orderService.deleteOrder(id).subscribe(() =>{
-        this.alertify.success('Заказ удалён');
-        this.orders.splice(this.orders.findIndex(c => c.id===id),1);
-    }, error => {
-      this.alertify.error(error);
-    })
-  }
 }

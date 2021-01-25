@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-2"><div class="col-lg-2"><button class="btn btn-secondary ml-1" type="button" (click)="back()">Назад</button></div></div>
+    <div class="col-lg-8">
+      <ul>
+        <li>{{orderDetail.clientSurname}} {{orderDetail.clientName}} {{orderDetail.patronymic}}</li>
+        <li>{{orderDetail.phoneNumber}} {{orderDetail.email}}</li>
+        <li>{{orderDetail.deliveryMethod}} {{orderDetail.place}} {{orderDetail.placeNumber}}</li>
+        <li>{{orderDetail.paymentMethod}} {{orderDetail.sumOrder}}</li>
+        <li>{{orderDetail.statusName}}</li>  
+      </ul>
+    </div>
+    <div class="col-lg-2"></div> 
+  </div>
+</div>
+<div class="row" >
+  <div class="col-lg-12">
+  <app-stringsorder [stringsOrder] = "orderDetail"></app-stringsorder>
+  </div>
+</div>
+
+

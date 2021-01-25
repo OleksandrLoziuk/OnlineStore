@@ -23,6 +23,9 @@ import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
 import { ReceiptAddComponent } from './receipt-add/receipt-add.component';
 import { ReceiptListResolver } from './_resolvers/receipt-list.resolver';
 import { OrdersListResolver } from './_resolvers/orders-list.resolver';
+import { OrderEditComponent } from './order-edit/order-edit.component';
+import { OrderDetailResolver } from './_resolvers/order-detail.resolver';
+import { StringsorderComponent } from './stringsorder/stringsorder.component';
 
 
 
@@ -40,7 +43,9 @@ const routes: Routes = [
   {path: 'categoriesadmin/add', component: CategoryAddComponent},
   {path: 'categoriesadmin/:id/edit', component: CategoryEditComponent, resolve: {category: CategoriesEditResolver}},
   {path: 'colors', component: ColorsListComponent, resolve: {colors: ColorsListReolver} },
-  {path: 'colors/add', component: ColorsAddComponent}
+  {path: 'colors/add', component: ColorsAddComponent},
+  {path: 'orderadmin/:id', component: OrderEditComponent, resolve: {orderDetail: OrderDetailResolver}},
+  {path: 'orderadmin/:id/stringsorderadmin', component: StringsorderComponent}
 ];
 
 @NgModule({

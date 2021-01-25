@@ -20,8 +20,7 @@
       <td>{{item.dateTimeOrder}}</td>
       <td>{{item.sumOrder}}</td>
       <td>{{item.status}}</td>
-      <td class="text-right"><button class="btn btn-danger" (click)="deleteOrder(item.id)"><i class="fa fa-trash"></i></button></td>
-      <td><button class="btn btn-primary" [routerLink]="['/productsadmin/'+ item.id +'/edit']"><i class="fa fa-edit"></i></button></td>
+      <td><button class="btn btn-primary" [routerLink]="['/orderadmin/'+ item.id]"><i class="fa fa-edit"></i></button></td>
     </tr>
   </tbody>
 </table>

@@ -42,6 +42,9 @@ import { ProductsEditResolver } from './_resolvers/products-edit.resolver';
 import { ReceiptAddComponent } from './receipt-add/receipt-add.component';
 import { ReceiptListResolver } from './_resolvers/receipt-list.resolver';
 import { OrdersListResolver } from './_resolvers/orders-list.resolver';
+import { OrderEditComponent } from './order-edit/order-edit.component';
+import { OrderDetailResolver } from './_resolvers/order-detail.resolver';
+import { StringsorderComponent } from './stringsorder/stringsorder.component';
 
 
 
@@ -54,7 +57,7 @@ export function tokenGetter() {
 }
 
 @NgModule({
-   declarations: [										
+   declarations: [												
       AppComponent,
       NavComponent,
       AuthComponent,
@@ -76,6 +79,8 @@ export function tokenGetter() {
       ColorsAddComponent,
       ProductEditComponent,
       ReceiptAddComponent,
+      OrderEditComponent,
+      StringsorderComponent
    ],
    imports: [
       BrowserModule,
@@ -105,7 +110,8 @@ export function tokenGetter() {
       ColorsListReolver,
       ProductsEditResolver,
       ReceiptListResolver,
-      OrdersListResolver
+      OrdersListResolver,
+      OrderDetailResolver
    ],
    bootstrap: [
       AppComponent

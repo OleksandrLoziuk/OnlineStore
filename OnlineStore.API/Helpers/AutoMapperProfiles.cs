@@ -62,6 +62,53 @@ namespace OnlineStore.API.Helpers
             .ForMember(dest => dest.ClientPhone, opt => {
                 opt.MapFrom(src => src.Client.PhoneNumber);
             });
+            CreateMap<Order, OrderForDetailDto>()
+            .ForMember(dest => dest.ClientId, opt => {
+                opt.MapFrom(src => src.ClientId);
+            })
+            .ForMember(dest => dest.ClientName, opt => {
+                opt.MapFrom(src => src.Client.ClientName);
+            })
+            .ForMember(dest => dest.ClientSurname, opt => {
+                opt.MapFrom(src => src.Client.ClientSurname);
+            })
+            .ForMember(dest => dest.Patronymic, opt => {
+                opt.MapFrom(src => src.Client.Patronymic);
+            })
+            .ForMember(dest => dest.PhoneNumber, opt => {
+                opt.MapFrom(src => src.Client.PhoneNumber);
+            })
+            .ForMember(dest => dest.Place, opt => {
+                opt.MapFrom(src => src.Client.Place);
+            })
+            .ForMember(dest => dest.PlaceNumber, opt => {
+                opt.MapFrom(src => src.Client.PlaceNumber);
+            })
+            .ForMember(dest => dest.PaymentMethod, opt => {
+                opt.MapFrom(src => src.Client.PaymentMethod);
+            })
+            .ForMember(dest => dest.DeliveryMethod, opt => {
+                opt.MapFrom(src => src.Client.DeliveryMethod);
+            })
+            .ForMember(dest => dest.Email, opt => {
+                opt.MapFrom(src => src.Client.Email);
+            })
+            .ForMember(dest => dest.DateTimeOrder, opt => {
+                opt.MapFrom(src => src.DateTimeOrder.ToLongDateString());
+            })
+            .ForMember(dest => dest.StatusName, opt => {
+                opt.MapFrom(src => src.Status.Name);
+            });
+            CreateMap<StringsOrder, StingsOrderForListDto>()
+            .ForMember(dest => dest.ProductName, opt => {
+                opt.MapFrom(src =>src.Product.ProductName);
+            })
+            .ForMember(dest => dest.Quantity, opt => {
+                opt.MapFrom(src => src.Quantity);
+            })
+            .ForMember(dest => dest.Amount, opt => {
+                opt.MapFrom(src => src.Quantity * src.Product.Cost);
+            });
             
         }
     }
