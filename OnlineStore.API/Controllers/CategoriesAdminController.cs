@@ -109,7 +109,7 @@ namespace OnlineStore.API.Controllers
             {
                 return Ok();
             }
-            return BadRequest("Хуйня вышла!");
+            return BadRequest();
 
         }
     }

@@ -17,7 +17,6 @@ import { EndComponent } from './end/end.component';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
   {path: 'categories', component: CategoriesListComponent},
   {path: 'categories/:id', component: CategoryDetailComponent, resolve: {categories: CategoryDetailResolver}},
   {path: 'categories/:catid/:prodid', component: ProductDetailComponent, resolve: {product: ProductDetailResolver}},
@@ -29,7 +28,7 @@ const routes: Routes = [
   {path: 'cart', component: ShopCartComponent},
   {path: 'order', component: OrderComponent},
   {path: 'end', component: EndComponent},
-  {path: '**', redirectTo: '', pathMatch: 'full'}
+  {path: '**', redirectTo: 'categories', pathMatch: 'full'}
 ];
 
 @NgModule({

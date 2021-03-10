@@ -8,7 +8,7 @@
       <th scope="col">Номер клиента</th>
       <th scope="col">Дата заказа</th>
       <th scope="col">Сумма</th>
-      <th scope="col">Статус</th>
+      <!-- <th scope="col">Статус</th> -->
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -19,7 +19,7 @@
       <td>{{item.clientPhone}}</td>
       <td>{{item.dateTimeOrder}}</td>
       <td>{{item.sumOrder}}</td>
-      <td>{{item.status}}</td>
+      <!-- <td>{{item.status}}</td> -->
       <td><button class="btn btn-primary" [routerLink]="['/orderadmin/'+ item.id]"><i class="fa fa-edit"></i></button></td>
     </tr>
   </tbody>

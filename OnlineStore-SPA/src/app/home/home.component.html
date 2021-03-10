@@ -1,15 +1,9 @@
-<div class="cotainer container-fluid ">
-  <div class="row">
-    <div class="col-lg-2">
-      <div class="list-group categories mt-3 mb-3">
+
+      <div  class="list-group categories mt-1 mb-3">
           <a [routerLink]="['/categories/', item.id]" *ngFor="let item of categories" class="list-group-item list-group-item-action text-light">{{item.name}}</a>
-        </div>
       </div>
-      <div class="col-lg-10 mt-3">
-        <router-outlet></router-outlet>
-      </div>
-  </div>
-</div>
+
+
 
 
 

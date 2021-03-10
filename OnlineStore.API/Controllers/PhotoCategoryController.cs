@@ -99,7 +99,7 @@ namespace OnlineStore.API.Controllers
                      return CreatedAtRoute("GetPhotoCategory", new{id = photoCategory.Id}, photoCategoryToReturn);
                  }
             
-            return BadRequest("Хуйня вышла!");
+            return BadRequest();
 
         }
         

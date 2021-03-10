@@ -1,9 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../_services/category.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { Category } from '../_models/category';
-import { Product } from '../_models/Product';
+import { StringsOrderService } from '../_services/stringsOrder.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Product } from '../_models/Product';
 export class HomeComponent implements OnInit {
   categories: Category[];
   constructor(private router: Router, private categoryService: CategoryService,
-    private alertify: AlertifyService) {}
+    private alertify: AlertifyService, private stringOrder: StringsOrderService) {}
   
   ngOnInit() {
     this.router.navigate(['/categories']);

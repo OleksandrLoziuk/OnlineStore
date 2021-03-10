@@ -99,7 +99,7 @@ namespace OnlineStore.API.Controllers
             {
                 return BadRequest("Цвет не существует");
             }
-            productToRepo.IsAvailable = false;
+            productToRepo.IsAvailable = true;
             if (await _repo.AddItemAsync(productToRepo))
             {
                 var prodToRet = _mapper.Map<ProductForDetailedDto>(productToRepo);

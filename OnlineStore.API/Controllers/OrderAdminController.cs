@@ -26,6 +26,7 @@ namespace OnlineStore.API.Controllers
         public async Task<IActionResult> GetOrders()
         {
             var orderFromRepo = await _orderRepo.AllItems.Include(s => s.Status).Include(c => c.Client).ToListAsync();
+            orderFromRepo.Reverse();
             var orderToReturn = _mapper.Map<IEnumerable<OrderToListDto>>(orderFromRepo);
             return Ok(orderToReturn);
         }

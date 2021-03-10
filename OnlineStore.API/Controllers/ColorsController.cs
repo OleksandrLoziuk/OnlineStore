@@ -68,7 +68,7 @@ namespace OnlineStore.API.Controllers
                     return Ok();
                 }
             }
-            return BadRequest("Что то пошло не так");
+            return BadRequest();
         }
 
     }

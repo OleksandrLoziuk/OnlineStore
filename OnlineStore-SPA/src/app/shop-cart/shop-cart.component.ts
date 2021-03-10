@@ -4,6 +4,7 @@ import { StringsOrderService } from '../_services/stringsOrder.service';
 import { StringsOrder } from '../_models/StringsOrder';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
+import { OrderService } from '../_services/order.service';
 
 @Component({
   selector: 'app-shop-cart',

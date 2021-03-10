@@ -11,7 +11,6 @@ import { AlertifyService } from './alertify.service';
 export class StringsOrderService {
 baseUrl = environment.apiUrl + 'cart/';
 products: Product[] = [];
-
 constructor(private http: HttpClient, private alertify: AlertifyService) { }
 
 addProduct(product: Product) {

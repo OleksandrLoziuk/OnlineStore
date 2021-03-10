@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/welcomepage']);
 
       }, error => {
-        this.alertify.error('Ещё раз ошибёшься, пойдёшь НА ХУЙ!');
+        this.alertify.error('Неверное имя пользоватиля или пароль');
       });
   }
 

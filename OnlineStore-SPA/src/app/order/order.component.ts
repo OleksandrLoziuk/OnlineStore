@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StringsOrderService } from '../_services/stringsOrder.service';
 import { OrderService } from '../_services/order.service';
@@ -10,7 +10,6 @@ import { AlertifyService } from '../_services/alertify.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
- 
   model: any = {};
   deliveries = [
     {name: 'Новая почта'},
